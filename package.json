@@ -1,0 +1,26 @@
+{
+  "name": "fitness-guru",
+  "version": "1.0.0",
+  "description": "project01 for WDI",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sherwin32/fitness-guru.git"
+  },
+  "author": "Tahl / Sherwin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sherwin32/fitness-guru/issues"
+  },
+  "homepage": "https://github.com/Sherwin32/fitness-guru#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "handlebars": "^4.0.10",
+    "mongoose": "^4.12.3"
+  }
+}
