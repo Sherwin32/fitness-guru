@@ -20,6 +20,10 @@ $(document).ready(function() {
     $('#create-form').show();
   })
 
+    //function hideAll(){
+
+    // }
+
 });
 
 

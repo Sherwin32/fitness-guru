@@ -39,3 +39,7 @@ h1, h2 {
 	font-family: 'Wallpoet', cursive;
 	margin-bottom: 20px;
 }
+
+.recommendation {
+	border: 2px outset;
+}
