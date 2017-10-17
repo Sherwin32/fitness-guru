@@ -8,7 +8,6 @@
 	position: absolute;
 	left:0; top:0;
 	background-size: cover;
-	/*min-height: 300px;*/
 	height: 100%;
 	width:100%;
 	background-image: url('../images/best-personal-trainer-nj.jpg');
@@ -22,8 +21,6 @@ nav {
 }
 
 body {
-	/*sanity check*/
-	/*background-color: skyblue;*/
 	font-family: 'Allerta Stencil', sans-serif;
 }
 

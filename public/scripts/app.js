@@ -7,22 +7,40 @@
 
 $(document).ready(function() {
   console.log('app.js loaded!');
-
+// On click listener for log in (sign in) button
   $('#log-in-btn').on('click', function(){
-    $('#built-in-content').hide();
-    $('#create-form').hide();
+    hideAll();
     $('#log-in-form').show();
   })
 
-    $('#create-btn').on('click', function(){
-    $('#built-in-content').hide();
-    $('#log-in-form').hide();
-    $('#create-form').show();
+// On click listener for create button
+  $('#create-btn').on('click', function(){
+    hideAll();
+    $('#create-form-panel').show();
   })
 
-    //function hideAll(){
+  $('#create-form').on('submit', function(e){
+    e.preventDefault();
+    console.log($(this).serializeArray());
+    console.log($(this).serialize());
 
-    // }
+     var data = $(this).serialize().split("&");
+    console.log(data);
+    var obj={};
+    for(var key in data)
+    {
+        console.log(data[key]);
+        obj[data[key].split("=")[0]] = data[key].split("=")[1];
+    }
+    console.log(obj);
+  })
+
+    function hideAll(){
+      $('#built-in-content').hide();
+      $('#create-form-panel').hide();
+      $('#log-in-form').hide();
+      $('#recommendation').hide();
+    }
 
 });
 
