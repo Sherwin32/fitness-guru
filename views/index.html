@@ -10,6 +10,7 @@
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./styles/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Wallpoet" rel="stylesheet">
 
     <!-- VENDOR SCRIPTS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -18,11 +19,13 @@
 
     <!-- APPLICATION SCRIPTS -->
     <script src="./scripts/app.js"></script>
+
+
 </head>
 
 <body>
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <button id="log-in-btn" class="btn-success pull-right">Log in</button>
+        <button id="log-in-btn" class="btn-success pull-right">Sign up</button>
         <button id="create-btn" class="btn-primary pull-right">Create</button>
     </nav>
     <header class="jumbotron">
@@ -34,11 +37,11 @@
     </header>
     <!-- BEGIN BUILTIN CONTENT -->
     <div id="built-in-content">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <p>If you're trying to find an online guru to master your health, you're in the right place!</p>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <p>If you're trying to find an online guru to master your health, you're in the right place!</p>
+            </div>
         </div>
-      </div>
     </div>
     <!-- END BUILTIN CONTENT -->
     <!-- BEGIN FORM SAMPLE -->
@@ -46,13 +49,15 @@
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                <!-- LOG IN FORM START -->
                 <div id="log-in-form" style="display:none">
                     <div class="col-md-9 col-xs-12">
+                        <h2>Sign up</h2>
                         <form class="form-horizontal">
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">ID:</label>
+                                <label class="control-label col-sm-2" for="id">ID:</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" name="id" placeholder="Enter email">
+                                    <input type="text" class="form-control" name="id" placeholder="Enter email">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -76,7 +81,132 @@
                         </form>
                     </div>
                 </div>
+                <!-- LOG IN FORM END -->
+                <!-- CREATE FORM START -->
+                <div id="create-form" style="display:none">
+                  <h2>Create New Account</h2>
+                    <form class="form-horizontal">
+                      <div class="col-md-6 col-xs-12">
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="name">Name:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="name" placeholder="Enter email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-3" for="gender">Gender:</label>
+                          <div class="row">
+                            <div class="col-sm-4">
+                                <select class="form-control" name="gender">
+                                  <option value="">gender</option>
+                                  <option value="trans">transgender</option>
+                                  <option value="female">female</option>
+                                  <option value="male">male</option>
+                                </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="id">User ID:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="id" placeholder="Enter ID">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="pwd">Password:</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" name="pwd" placeholder="Enter password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="pwd">Confirm Password:</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" name="confirm-pwd" placeholder="Confirm password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="height">Height:</label>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="feet">
+                                      <option value="2">2ft</option>
+                                      <option value="3">3ft</option>
+                                      <option value="4">4ft</option>
+                                      <option value="5" selected="selected">5ft</option>
+                                      <option value="6">6ft</option>
+                                      <option value="7">7ft</option>
+                                      <option value="8">8ft</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="inch">
+                                      <option value="0">0"</option>
+                                      <option value="1">1"</option>
+                                      <option value="2">2"</option>
+                                      <option value="3">3"</option>
+                                      <option value="4">4"</option>
+                                      <option value="5">5"</option>
+                                      <option value="6">6"</option>
+                                      <option value="7">7"</option>
+                                      <option value="8" selected="selected">8"</option>
+                                      <option value="9">9"</option>
+                                      <option value="10">10"</option>
+                                      <option value="11">11"</option>
+                                      <option value="12">12"</option>
+                                    </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="weight">Weight:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="weight" placeholder="Enter weight in lb">
+                                </div>
+                            </div>
+                    </div>
+                    <!-- end of first colum -->
+                    <div class="col-md-6 col-xs-12">
+                        <!-- <div class="form-group">
+                            <label class="control-label col-sm-2" for="bdfat">Body Fat:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="bdfat" placeholder="Enter body fat(optional)">
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="fitness-goal">Fitness Goal:</label>
+                            <div class="row">
+                            <div class="col-sm-4">
+                                <select class="form-control" name="fitness-goal">
+                                  <option value="strength">Strength</option>
+                                  <option value="building">Building</option>
+                                  <option value="condition" selected>Condition</option>
+                                </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-4" for="weight-goal">Weight Goal:</label>
+                          <div class="row">
+                            <div class="col-sm-4">
+                                <select class="form-control" name="weight-goal">
+                                  <option value="lose">Lose weight</option>
+                                  <option value="Maintain" selected>Maintain weight</option>
+                                  <option value="gain">Gain weight</option>
+                                </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-offset-3 col-sm-9">
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
             </div>
+            <!-- CREATE FORM END -->
         </div>
     </div>
 

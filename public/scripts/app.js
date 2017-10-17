@@ -10,7 +10,14 @@ $(document).ready(function() {
 
   $('#log-in-btn').on('click', function(){
     $('#built-in-content').hide();
+    $('#create-form').hide();
     $('#log-in-form').show();
+  })
+
+    $('#create-btn').on('click', function(){
+    $('#built-in-content').hide();
+    $('#log-in-form').hide();
+    $('#create-form').show();
   })
 
 });

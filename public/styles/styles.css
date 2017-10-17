@@ -1,6 +1,7 @@
 .jumbotron {
 	position: relative;
 	background-color: transparent;
+	margin-bottom: 10px;
 }
 
 .jumbotron .img {
@@ -16,11 +17,25 @@
 
 }
 
+nav {
+	background-color: lightgrey;
+}
+
 body {
 	/*sanity check*/
 	/*background-color: skyblue;*/
+	font-family: 'Allerta Stencil', sans-serif;
+}
+
+#panel-body {
+	margin-bottom: 20px;
 }
 
 button {
 	margin: 10px;
+}
+
+h1, h2 {
+	font-family: 'Wallpoet', cursive;
+	margin-bottom: 20px;
 }
