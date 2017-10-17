@@ -2,17 +2,17 @@
 /* Function returns object!  Two prop: .bmi, .bmiStr */
 function calcBMI (weightPounds, heightInches) {
 	var kg = weightPounds / 2.2;
-  var m = heightInches * 0.0254;
-  var bmi = kg / Math.pow(m,2);
-  console.log("parts",kg, m, bmi);
-  if ( bmi<18.5 ) {
-  	var bmiStr = "Underweight";
-  } else if ( bmi=>25 ) {
-  	var bmiStr = "Overweight";
-  } else {
-  	var bmiStr = "Healthy";
-  }
-	return ({bmi,bmiStr});
+  	var m = heightInches * 0.0254;
+  	var bmi = kg / Math.pow(m,2);
+  // console.log("parts",kg, m, bmi);
+  	if ( bmi<18.5 ) {
+  		var bmiStr = "Underweight";
+  	} else if ( bmi=>25 ) {
+  		var bmiStr = "Overweight";
+  	} else {
+  		var bmiStr = "Healthy";
+  	}
+	return ({'bmi':bmi,'bmiStr':bmiStr});
 }
 
 console.log (calcBMI(174.5,5*12+8));
@@ -45,10 +45,7 @@ var nutrition = [
 
 function profileToRecomm( userProfile, bmi ) {
 	var fitnessGoal = userProfile.fitnessGoal;
-  //var weightGoal = userProfile.weightGoal;
-  //var height = userProfile.height;
-  //var weight = userProfile.weight;
-	var recommendation = new Object;
+ 	var recommendation = new Object;
 
   if (fitnessGoal[0].toLowerCase() === "s") {
   	recommendation.resistance = resistance[0];
@@ -63,7 +60,7 @@ function profileToRecomm( userProfile, bmi ) {
     recommendation.cardio = cardio[2];
     recommendation.nutrition = nutrition[2];
   }
-  // console.log("#",recommendation);
+ 
   // var middleWeight = 21.75 * (height * 0.0254) ** 2;
   
   if (bmi.bmiStr[0].toLowerCase() === 'o') {
@@ -73,7 +70,6 @@ function profileToRecomm( userProfile, bmi ) {
   } else {
   	var weightLoss = "";
   }
-  // console.log("$",weightLoss);
   recommendation.nutrition += weightLoss;
   
   return recommendation;
