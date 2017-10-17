@@ -1,0 +1,26 @@
+.jumbotron {
+	position: relative;
+	background-color: transparent;
+}
+
+.jumbotron .img {
+	position: absolute;
+	left:0; top:0;
+	background-size: cover;
+	/*min-height: 300px;*/
+	height: 100%;
+	width:100%;
+	background-image: url('../images/best-personal-trainer-nj.jpg');
+	opacity: 0.3;
+	z-index: -1;
+
+}
+
+body {
+	/*sanity check*/
+	/*background-color: skyblue;*/
+}
+
+button {
+	margin: 10px;
+}
