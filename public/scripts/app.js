@@ -5,6 +5,39 @@
  *
  */
 $(document).ready(function() {
+
+  var builtInInfor = {
+    feet: "5",
+    inch: "8",
+    'fitness-goal': "building",
+    gender: "male",
+    id: "sherwin123",
+    name: "Sherwin",
+    pwd: "123",
+    'confirm-pwd': "123",
+    weight: "143",
+  };
+
+  // $('#create-form').validator({
+  //       framework: 'bootstrap',
+  //       icon: {
+  //           valid: 'glyphicon glyphicon-ok',
+  //           invalid: 'glyphicon glyphicon-remove',
+  //           validating: 'glyphicon glyphicon-refresh'
+  //       },
+  //       fields: {
+  //           confirmPassword: {
+  //               validators: {
+  //                   identical: {
+  //                       field: 'password',
+  //                       message: 'The password and its confirm are not the same'
+  //                   }
+  //               }
+  //           }
+  //       }
+  //   });
+
+
     console.log('app.js loaded!');
     // On click listener for log in (sign in) button
     $('#log-in-btn').on('click', function() {
@@ -24,7 +57,7 @@ $(document).ready(function() {
         console.log(data);
         var obj = {};
         for (var key in data) {
-            console.log(data[key]);
+            // console.log(data[key]);
             obj[data[key].split("=")[0]] = data[key].split("=")[1];
         }
         console.log(obj);
