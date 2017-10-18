@@ -91,17 +91,26 @@ renderRec(builtInInfo);
         $('#create-form-panel').show();
     })
 
-    $('#create-form').on('submit', function(e) {
-        e.preventDefault();
-        var data = $(this).serialize().split("&");
-        console.log(data);
-        var obj = {};
-        for (var key in data) {
-            // console.log(data[key]);
-            obj[data[key].split("=")[0]] = data[key].split("=")[1];
-        }
-        console.log(obj);
-    })
+    $('#create-form').on('submit', createFormOnSubmit);
+
+    function createFormOnSubmit(e){
+      e.preventDefault();
+      $.ajax({
+        method: 'POST',
+        url: '/create',
+        data: $(this).serialize(),
+        success: createSuccess,
+        error: handleError
+      })
+    }
+
+    function createSuccess(json){
+      console.log(json);
+    }
+
+    function handleError(a,b,c){
+      console.log(a,b,c);
+    }
 
     function hideAll() {
         $('#built-in-content').hide();
@@ -148,10 +157,10 @@ renderRec(builtInInfo);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
+          ['Oct01',  1000,      400],
+          ['Oct02',  1170,      460],
+          ['Oct03',  660,       1120],
+          ['Dec02',  1030,      540]
         ]);
 
         var options = {
