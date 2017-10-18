@@ -18,6 +18,36 @@ $(document).ready(function() {
     weight: "143",
   };
 
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['BMI', 22],
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+          redFrom: 24, redTo: 40,
+          greenFrom: 17, greenTo: 25,
+          yellowFrom:0, yellowTo: 17,
+          minorTicks: 5, max: 40
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('bmi-chart'));
+
+        chart.draw(data, options);
+
+        // setInterval(function() {
+        //   data.setValue(0, 1, 40 + Math.round(60 * Math.random()- Math.round(60 * Math.random())));
+        //   chart.draw(data, options);
+        // }, 300);
+      }
+
+
   // $('#create-form').validator({
   //       framework: 'bootstrap',
   //       icon: {
