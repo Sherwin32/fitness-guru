@@ -30,7 +30,7 @@ $(document).ready(function() {
         ]);
 
         var options = {
-          width: 400, height: 120,
+          width: 400, height: 250,
           redFrom: 24, redTo: 40,
           greenFrom: 17, greenTo: 25,
           yellowFrom:0, yellowTo: 17,
@@ -41,10 +41,10 @@ $(document).ready(function() {
 
         chart.draw(data, options);
 
-        // setInterval(function() {
-        //   data.setValue(0, 1, 40 + Math.round(60 * Math.random()- Math.round(60 * Math.random())));
-        //   chart.draw(data, options);
-        // }, 300);
+        setInterval(function() {
+          data.setValue(0, 1, 22 + 2 * Math.random()- 2 * Math.random());
+          chart.draw(data, options);
+        }, 1000);
       }
 
 
