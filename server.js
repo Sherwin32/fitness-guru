@@ -17,17 +17,22 @@ app.use(function(req, res, next) {
     next();
 });
 
+// bcrypt
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
 /************
  * DATABASE *
  ************/
 
-// var db = require('./models');
-// var controller = require('./controller');
+var db = require('./models');
+var controller = require('./controller');
 
 /**********
  * ROUTES *
  **********/
-
 // Serve static files from the `/public` directory:
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
@@ -40,6 +45,8 @@ app.get('/', function homepage(req, res) {
 	console.log("got homepage request");
     res.sendFile(__dirname + '/views/index.html');
 });
+
+app.post('/create', controller.profile.create);
 
 
 /*

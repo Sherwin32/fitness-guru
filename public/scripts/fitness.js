@@ -9,7 +9,7 @@ function calcBMI (weightPounds, heightInches) {
   // console.log("parts",kg, m, bmi);
   	if ( bmi<18.5 ) {
   		var bmiStr = "Underweight";
-  	} else if ( bmi=>25 ) {
+  	} else if ( bmi>=25 ) {
   		var bmiStr = "Overweight";
   	} else {
   		var bmiStr = "Healthy";
