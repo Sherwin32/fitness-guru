@@ -21,6 +21,9 @@
 
     <!-- APPLICATION SCRIPTS -->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="./scripts/.SECRET.js"></script>
+    <script src="./scripts/authen.js"></script>
+    <script src="./scripts/fitness.js"></script>
     <script src="./scripts/app.js"></script>
     <script src="./scripts/handlebars-v4.0.10.js"></script>
     <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
@@ -56,8 +59,8 @@
 
       <!-- LOG IN FORM START -->
       <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-                  <div class="col-md-9 col-xs-12" id="log-in-form" style="display:none">
+          <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                  <div class="col-md-8 col-xs-8 col-md-offset-2" id="log-in-form" style="display:none">
                       <h2>Sign up</h2>
                       <form class="form-horizontal">
                           <div class="form-group">
@@ -91,7 +94,8 @@
                 <div id="create-form-panel" style="display:">
                     <h2>Create New Account</h2>
                     <form class="form-horizontal" id="create-form" role="form" data-toggle="validator">
-                        <div class="col-md-6 col-xs-12">
+                    <!-- First col -->
+                        <div class="col-md-6 col-sm-4">
                           <div class="form-group">
                             <label class="control-label col-sm-3" for="name">Name:</label>
                             <div class="col-sm-9">
@@ -103,8 +107,8 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                   <select class="form-control" name="gender">
-                                    <option value="">gender</option>
-                                    <option value="trans">transgender</option>
+                                    <option value=""></option>
+                                    <option value="other">other</option>
                                     <option value="female">female</option>
                                     <option value="male">male</option>
                                   </select>
@@ -131,7 +135,8 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6 col-xs-12">
+                        <!-- Second col -->
+                        <div class="col-md-6 col-sm-4">
                           <div class="form-group">
                             <label class="control-label col-sm-3" for="height">Height:</label>
                             <div class="row">
@@ -165,17 +170,17 @@
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="control-label col-sm-3" for="weight">Weight:</label>
-                            <div class="col-sm-9">
-                              <input type="number" class="form-control" name="weight" placeholder="Enter weight in lb" required>
+                            <label class="control-label col-sm-3" for="weight">Weight (lb):</label>
+                            <div class="col-sm-3">
+                              <input type="number" class="form-control" name="weight" required>
                             </div>
                           </div>
 
                           <div class="form-group">
-                            <label class="control-label col-sm-3" for="fitness-goal">Fitness Goal:</label>
+                            <label class="control-label col-sm-3" for="fitnessGoal">Fitness Goal:</label>
                             <div class="row">
                               <div class="col-sm-5">
-                                <select class="form-control" name="fitness-goal">
+                                <select class="form-control" name="fitnessGoal">
                                   <option value="strength">Strength</option>
                                   <option value="building">Building</option>
                                   <option value="condition" selected>Condition</option>
@@ -203,14 +208,14 @@
                       <h1>Hello, Sherwin</h1>
                     </div>
                     <div class="col-md-6 col-xs-12">
-                      <p style="display: inline-block">Current weight: 145lb</p>
+                      <p style="display: inline-block">Current weight: <span id="weightSpan"></span>(lb)</p>
                         <button class="btn-xs btn-default" type="button" style="display: inline-block">update </button>
-                      <p>Fitness goal: </p>
+                      <p>Fitness goal: <span id="goalSpan"></span></p>
                     </div>
                   </div>
                   <!-- second row -->
                   <div class="row" style="height: 350px; margin-top: 30px">
-                    <div class="col-md-5 col-xs-12" style="background-color: yellow; height:350px;">
+                    <div class="col-md-5 col-xs-12" style="background-color: orange; height:350px;">
                       <h1>BMI Chart here</h1>
                       <div class="row">
                         <div class="col-md-6 col-md-offset-2" id="bmi-chart"></div>
@@ -218,32 +223,32 @@
                     </div>
                     <div class="col-md-7 col-xs-12" style="background-color: skyblue; height:350px;">
                       <h1>Linear Weight chart here</h1>
+                      <div class="row">
+                        <div class="col-md-8 col-md-offset-2" id="weight-chart"></div>
+                      </div>
                     </div>
                   </div>
                   <!-- third row -->
                   <div class="row" style="margin-top:40px">
-                    <div class="col-md-4 col-xs-12 recommendation"><!-- for resistance-->
-                      <div class="col-md-12 recommendation">
+                    <div class="col-md-4 col-xs-12 recBlock"><!-- for resistance-->
+                      <div class="col-md-12 recTitle">
                         <h1 class="text-center">Resistance</h1>
                       </div>
-                      <div class="col-md-12">
-                        <p style="height:300px">content here</p>
+                      <div class="col-md-12 recContent" id="rec-resistance">
                       </div>
                     </div>
-                    <div class="col-md-4 col-xs-12 recommendation"><!-- for cardio -->
-                      <div class="col-md-12 recommendation">
+                    <div class="col-md-4 col-xs-12 recBlock"><!-- for cardio -->
+                      <div class="col-md-12 recTitle">
                         <h1 class="text-center">Cardio</h1>
                       </div>
-                      <div class="col-md-12">
-                        <p style="height:300px">content here</p>
+                      <div class="col-md-12 recContent" id="rec-cardio">
                       </div>
                     </div>
-                    <div class="col-md-4 col-xs-12 recommendation"><!-- for nutrition -->
-                      <div class="col-md-12 recommendation">
+                    <div class="col-md-4 col-xs-12 recBlock"><!-- for nutrition -->
+                      <div class="col-md-12 recTitle">
                         <h1 class="text-center">Nutrition</h1>
                       </div>
-                      <div class="col-md-12">
-                        <p style="height:300px">content here</p>
+                      <div class="col-md-12 recContent" id="rec-nutrition">
                       </div>
                     </div>
                   </div>

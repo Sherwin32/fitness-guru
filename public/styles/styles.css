@@ -10,8 +10,8 @@
 	background-size: cover;
 	height: 100%;
 	width:100%;
-	/*background-image: url('../images/best-personal-trainer-nj.jpg');*/
-	background-image: url('../images/header.jpg');
+	background-image: url('../images/best-personal-trainer-nj.jpg');
+	/*background-image: url('../images/header.jpg');*/
 	opacity: 0.3;
 	z-index: -1;
 
@@ -38,6 +38,16 @@ h1, h2 {
 	margin-bottom: 20px;
 }
 
-.recommendation {
+.recBlock {
+	border-style: double;
+	border: 1px .5px 1px .5px;
+}
+
+.recTitle {
 	border: 2px outset;
+}
+
+.recContent {
+	margin-top: 15px;
+	height: 200px;
 }

@@ -1,3 +1,6 @@
+const passphrase = "trumPet_sOng$-4_listenin'to";
+const salt = "thIS_is-NOT";
+
 function hash (password) {
  	var newPassword = password + salt;
   var token = "";
