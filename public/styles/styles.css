@@ -14,12 +14,31 @@
 	/*background-image: url('../images/header.jpg');*/
 	opacity: 0.3;
 	z-index: -1;
-
 }
 
 nav {
 	background-color: lightgrey;
 }
+
+nav button {
+	margin: 10px;
+	border-radius: 8px;
+	border: none; 
+}
+
+button {
+	/*margin: 10px;*/
+	border-radius: 8px;
+	border: none; 
+}
+
+#log-in-btn {
+	background-color: blue;
+}
+#create-btn {
+	background-color: orange;
+}
+
 
 body {
 	font-family: 'Allerta Stencil', sans-serif;
@@ -29,13 +48,28 @@ body {
 	margin-bottom: 20px;
 }
 
-button {
-	margin: 10px;
+#built-in-content {
+	font-size: 24px;
 }
 
 h1, h2 {
 	font-family: 'Wallpoet', cursive;
 	margin-bottom: 20px;
+}
+
+.bmi-chart {
+	background-color: orange; 
+	height:350px;
+}
+
+.line-chart {
+	background-color: skyblue; 
+	height:350px;"
+}
+
+.jumbotron h1 {
+	text-shadow: 2px 2px #ff0000;
+	color: orange;
 }
 
 .recBlock {
