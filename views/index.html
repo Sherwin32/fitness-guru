@@ -5,38 +5,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>fitness guru</title>
-    <!-- VENDOR SCRIPTS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+    <title>Fitness Guru</title>
+    <link rel="icon" href="images/icon-healing.png">
+   
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- HAVE TO INCLUDE VALIDATOR TO USE VALIDATOR!!!! THIS THING TOOK ME AN HOUR TO SOLVE -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-
     <link rel="stylesheet" href="./styles/styles.css">
+ 
+    <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Wallpoet" rel="stylesheet">
-    <link rel="icon" href="images/icon-healing.png">
-
-
+    
     <!-- APPLICATION SCRIPTS -->
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="./scripts/.SECRET.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./scripts/handlebars-v4.0.10.js"></script>
+	<script src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- <script src="./scripts/.SECRET.js"></script> -->
     <script src="./scripts/authen.js"></script>
     <script src="./scripts/fitness.js"></script>
     <script src="./scripts/app.js"></script>
-    <script src="./scripts/handlebars-v4.0.10.js"></script>
-    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
-    <script type="text/javascript">
- 
-    </script>
 </head>
 
 <body>
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-      <button id="log-in-btn" class="btn-success pull-right">Sign up</button>
-      <button id="create-btn" class="btn-primary pull-right">Create</button>
+    	<img height=60 src="images/icon-healing.png" />
+      	<button id="log-in-btn" class="btn-success pull-right">Log in</button>
+      	<button id="create-btn" class="btn-primary pull-right">Sign up</button>
     </nav>
     <header class="jumbotron">
         <div class="img"></div>
@@ -48,49 +45,55 @@
     <!-- BEGIN FORM SAMPLE -->
     <div id="panel-body">
       <!-- BEGIN BUILTIN CONTENT -->
-      <div id="built-in-content" style="display:none">
+      <div id="built-in-content" style="display">
           <div class="row">
               <div class="col-md-10 col-md-offset-1">
-                  <p>If you're trying to find an online guru to master your health, you're in the right place!</p>
+                  <p>Fitness Guru is your home for achieving your fitness goals.  Sign up and tell us your fitness goal.  We'll give you an assessment right away.  Next, if you need to adjust your Body Mass Index (BMI), we'll give you the tool for tracking your weight over time.</p> <p>Sign up today!</p>
               </div>
           </div>
       </div>
       <!-- END BUILTIN CONTENT -->
 
-      <!-- LOG IN FORM START -->
-      <div class="row">
-          <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                  <div class="col-md-8 col-xs-8 col-md-offset-2" id="log-in-form" style="display:none">
-                      <h2>Sign up</h2>
-                      <form class="form-horizontal">
-                          <div class="form-group">
-                              <label class="control-label col-sm-2" for="id">ID:</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="id" placeholder="Enter ID">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="control-label col-sm-2" for="pwd">Password:</label>
-                              <div class="col-sm-10">
-                                  <input type="password" class="form-control" name="pwd" placeholder="Enter password">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="col-sm-offset-2 col-sm-10">
+      	<!-- LOG IN FORM START -->
+      	<div class="row">
+          	<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+             	<div class="col-md-8 col-xs-8 col-md-offset-2" id="log-in-form" style="display">
+                	<h2>Welcome! Please log in</h2>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="id">ID:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="id" placeholder="Enter ID">
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="pwd">Password:</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" name="pwd" placeholder="Enter password">
+                            </div>
+                         </div>
+                        <div class="form-group">                              
+                        	<div class="col-sm-offset-2 col-sm-10">
                                   <div class="checkbox">
                                       <label><input type="checkbox"> Remember me</label>
                                   </div>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="col-sm-offset-2 col-sm-10">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                               <div class="col-sm-offset-2 col-sm-10">
                                   <button type="submit" class="btn btn-default">Submit</button>
                               </div>
-                          </div>
-                      </form>
-                  </div>
-              <!-- LOG IN FORM END -->
-                <!-- CREATE FORM START -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- LOG IN FORM END -->
+
+        <!-- CREATE PROFILE FORM START -->
+     	<div class="row">
+          	<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+  
                 <div id="create-form-panel" style="display:">
                     <h2>Create New Account</h2>
                     <form class="form-horizontal" id="create-form" role="form" data-toggle="validator">
@@ -99,7 +102,7 @@
                           <div class="form-group">
                             <label class="control-label col-sm-3" for="name">Name:</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" name="name" placeholder="Enter name here!" required>
+                              <input type="text" class="form-control" name="name" placeholder="E.g., John Smith" minlength=6 required>
                             </div>
                           </div>
                           <div class="form-group">
@@ -107,10 +110,10 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                   <select class="form-control" name="gender">
-                                    <option value=""></option>
+                                    <!-- <option value=""></option> -->
                                     <option value="other">other</option>
                                     <option value="female">female</option>
-                                    <option value="male">male</option>
+                                    <option value="male" selected>male</option>
                                   </select>
                                 </div>
                             </div>
@@ -118,19 +121,19 @@
                           <div class="form-group">
                             <label class="control-label col-sm-3" for="id">User ID:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="id" placeholder="Enter ID" required>
+                                <input type="text" class="form-control" name="id" placeholder="E.g., user1234 (no spaces)" minlength=6 required>
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-sm-3" for="pwd">Password:</label>
                             <div class="col-sm-9">
-                              <input id="create-pwd" type="password" class="form-control" name="pwd" placeholder="Enter password" required>
+                              <input id="create-pwd" type="password" class="form-control" name="pwd" placeholder="Minimum of 8 characters" minlength=8 required>
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-sm-3" for="pwd">Confirm Password:</label>
                             <div class="col-sm-9">
-                              <input type="password" class="form-control" name="confirm-pwd" placeholder="Confirm password" data-match="#create-pwd" data-match-error="Whoops, these don't match" required>
+                              <input type="password" class="form-control" name="confirm-pwd" placeholder="Must be the same" data-match="#create-pwd" data-match-error="Whoops, these don't match" required>
                               <div class="help-block with-errors"></div>
                             </div>
                           </div>
@@ -172,7 +175,7 @@
                           <div class="form-group">
                             <label class="control-label col-sm-3" for="weight">Weight (lb):</label>
                             <div class="col-sm-3">
-                              <input type="number" class="form-control" name="weight" required>
+                              <input type="number" class="form-control" name="weight" min="40" required>
                             </div>
                           </div>
 
@@ -198,30 +201,45 @@
                 </div>
             </div>
             <!-- CREATE FORM END -->
+
             <!-- Recommendation START -->
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
                 <div id="recommendation" style="display:">
                   <!-- first row -->
                   <div class="row" style="margin-top:10px">
-                    <div class="col-md-6 col-xs-12">
+                    <div class="col-md-4 col-xs-12">
                       <h1>Hello, Sherwin</h1>
                     </div>
-                    <div class="col-md-6 col-xs-12">
-                      <p style="display: inline-block">Current weight: <span id="weightSpan"></span>(lb)</p>
-                        <button class="btn-xs btn-default" type="button" style="display: inline-block">update </button>
-                      <p>Fitness goal: <span id="goalSpan"></span></p>
+                    <div class="col-md-8 col-xs-12">
+                    	<div id="show-weight" style="display:">
+                      		<p style="display: inline-block">Current weight: <span id="weightSpan"></span>(lb)</p>
+                        	<button class="btn btn-default" type="button" style="margin-left: 10px">update </button>
+                      		<p>Fitness goal: <span id="goalSpan"></span></p>
+                      	</div>
+                      	<div class="row">
+                    	<div id="new-weight" style="display:">
+                            <!-- <div class="col-sm-12"> -->
+                          	<label class="control-label col-sm-3" for="new-weight-input">Add new weight:</label>
+                              <input id="new-weight-field" type="number" class="col-sm-1" name="new-weight-input" min="40" size=6 maxlength=3 required>
+                              <!-- <input type="number" name="foo" size=6> -->
+                            <!-- </div> -->
+                            <button type="submit" class="btn btn-default col-sm-2" style="margin-left: 10px">Submit</button>
+                        </div>
+                        </div>
+
+
                     </div>
                   </div>
                   <!-- second row -->
                   <div class="row" style="height: 350px; margin-top: 30px">
-                    <div class="col-md-5 col-xs-12" style="background-color: orange; height:350px;">
+                    <div class="col-md-5 col-xs-12 bmi-chart">
                       <h1>BMI Chart here</h1>
                       <div class="row">
                         <div class="col-md-6 col-md-offset-2" id="bmi-chart"></div>
                       </div>
                     </div>
-                    <div class="col-md-7 col-xs-12" style="background-color: skyblue; height:350px;">
+                    <div class="col-md-7 col-xs-12 line-chart">
                       <h1>Linear Weight chart here</h1>
                       <div class="row">
                         <div class="col-md-8 col-md-offset-2" id="weight-chart"></div>
@@ -257,6 +275,7 @@
               </div>
             </div>
             <!-- Recommendation END -->
+
         </div>
     </div>
     <!-- end of panel-body -->
