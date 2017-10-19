@@ -5,10 +5,10 @@
  *
  */
 $(document).ready(function() {
-
   const $cardio = $('#rec-cardio');
   const $resistance = $('#rec-resistance');
   const $nutrition = $('#rec-nutrition');
+  let currentUser = {};
 
 
 //push object when created
@@ -53,11 +53,6 @@ $(document).ready(function() {
   ];
   //ISO 8601
 
-console.log(feetInchToInch (parseInt(builtInInfo.feet), parseInt(builtInInfo.inch)));
-renderRec(builtInInfo);
-
-
-
   // $('#create-form').validator({
   //       framework: 'bootstrap',
   //       icon: {
@@ -82,7 +77,7 @@ renderRec(builtInInfo);
     // On click listener for log in (sign in) button
     $('#log-in-btn').on('click', function() {
         hideAll();
-        $('#log-in-form').show();
+        $('#log-in-panel').show();
     })
 
     // On click listener for create button
@@ -92,12 +87,46 @@ renderRec(builtInInfo);
     })
 
     $('#create-form').on('submit', createFormOnSubmit);
+    $('#log-in-submit').on('submit', logInOnSubmit);
+    $('#update-weight').on('submit', updateWeight);
+
+    function updateWeight(e){
+      e.preventDefault();
+      console.log($(this).serialize())
+    }
+    // $('#create-id').on('input', checkIdDuplicate);
+
+    // function checkIdDuplicate(){
+    //   // console.log($(this).serialize())
+    //   $.ajax({
+    //     method: 'POST',
+    //     url: '/profile/checkId',
+    //     data: $(this).serialize(),
+    //     success: checkIdSuccess,
+    //     error: handleError
+    //   })
+    // }
+
+
+
+    function logInOnSubmit(e){
+      e.preventDefault();
+      console.log($(this).serialize())
+      $.ajax({
+        method: 'POST',
+        url: '/profile/login',
+        data: $(this).serialize(),
+        success: createSuccess,
+        error: handleError
+      })
+      console.log("get request!!!log in!!")
+    }
 
     function createFormOnSubmit(e){
       e.preventDefault();
       $.ajax({
         method: 'POST',
-        url: '/create',
+        url: '/profile',
         data: $(this).serialize(),
         success: createSuccess,
         error: handleError
@@ -105,7 +134,14 @@ renderRec(builtInInfo);
     }
 
     function createSuccess(json){
-      console.log(json);
+      if(json==="exist error"){
+        console.log(json);
+        alert("id already exists. Please use another one")
+      }else{
+        console.log(json);
+        renderRec(json);
+        console.log("currentUser: ", currentUser)
+      }
     }
 
     function handleError(a,b,c){
@@ -115,7 +151,7 @@ renderRec(builtInInfo);
     function hideAll() {
         $('#built-in-content').hide();
         $('#create-form-panel').hide();
-        $('#log-in-form').hide();
+        $('#log-in-panel').hide();
         $('#recommendation').hide();
     }
 
@@ -177,6 +213,9 @@ renderRec(builtInInfo);
     }
 
     function renderRec(userProfile){
+      currentUser = userProfile;
+      hideAll()
+      $('#recommendation').show();
       var userPound = parseInt(userProfile.weight);
       var userInch = feetInchToInch (parseInt(userProfile.feet), parseInt(userProfile.inch));
       // This is gonna return {'bmi':bmi,'bmiStr':bmiStr}
@@ -188,6 +227,7 @@ renderRec(builtInInfo);
       $resistance.append(recObj.resistance);
       $cardio.append(recObj.cardio);
       $nutrition.append(recObj.nutrition);
+      $('#user-name').text(userProfile.name)
       console.log("bmiObj: ", bmiObj)
       drawBMI(bmiObj);
       $('#weightSpan').text(userPound);
