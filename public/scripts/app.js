@@ -16,9 +16,6 @@
 
 $(document).ready(function() {
   console.log('app.js loaded!');
-  // google.charts.load('current', {'packages':['gauge']});
-  // google.charts.load('current', {'packages':['corechart']});
-// killCookie();
 const timeToExpire = 0.1;    //time until expire
 var isLogIn = false;
 var userCookie = getCookie("FITNESS_GURU_ID")
@@ -276,26 +273,6 @@ function drawWeight(weightIn) {
         chart.draw(data, options);
     }
   }
-
-  // function drawWeight(weightIn) {
-  //     var data = google.visualization.arrayToDataTable([
-  //         ['Year', 'Sales', 'Expenses'],
-  //         ['Oct01', 1000, 400],
-  //         ['Oct02', 1170, 460],
-  //         ['Oct03', 660, 1120],
-  //         ['Dec02', 1030, 540]
-  //     ]);
-  //     var options = {
-  //         title: 'Company Performance',
-  //         curveType: 'function',
-  //         legend: {
-  //             position: 'bottom'
-  //         },
-  //         height: 250
-  //     };
-  //     var chart = new google.visualization.LineChart(document.getElementById('weight-chart'));
-  //     chart.draw(data, options);
-  // }
 
   function renderRec(userProfile) {
       currentUser = userProfile;
