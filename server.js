@@ -53,6 +53,8 @@ app.post('/profile', controller.profile.create);
 
 app.get('/profile', controller.profile.logIn);
 
+app.get('/profile/cookie', controller.profile.cookieLogIn);
+
 
 /*
  * JSON API Endpoints

@@ -1,12 +1,30 @@
-/* CLIENT-SIDE JS
- *
- * You may edit this file as you see fit.  Try to separate different components
- * into functions and objects as needed.
- *
- */
-$(document).ready(function() {
+/* CLIENT-SIDE JS*/
 
+
+
+$(document).ready(function() {
   console.log('app.js loaded!');
+  // google.charts.load('current', {'packages':['gauge']});
+  // google.charts.load('current', {'packages':['corechart']});
+// killCookie();
+const timeToExpire = 0.1;    //time until expire
+var isLogIn = false;
+var userCookie = getCookie("FITNESS_GURU_ID")
+if (userCookie) {
+  $.ajax({
+          method: 'GET',
+          url: '/profile/cookie',
+          data: userCookie,
+          success: logInProfile,
+          error: handleError
+  })
+      console.log("got an cookie!!!log in!!")
+      console.log("userCookie: ", userCookie)
+}
+
+
+//cookie end
+
   let currentUser = {};
 
   //push object when created
@@ -52,7 +70,7 @@ $(document).ready(function() {
   $('#update-weight').on('submit', updateWeight);
 
   $('#test-btn').on('click', navBarToggle);
-  var isLogIn = true;
+
   function navBarToggle(){
     if(isLogIn){
       $('#log-in-btn').hide();
@@ -106,8 +124,12 @@ $(document).ready(function() {
       if(json === "login error"){
         console.log(json, "inside login error");
         alert("Oops! Wrong id or password");
+      }else if(json === "cookie fail"){
+        console.log("cookie fail");
+        console.log("cookie: ", userCookie);
       }else{
           console.log(json, "inside render");
+          setCookie("FITNESS_GURU_ID", `userId=${json.userId}`, 0.03);
           renderRec(json);
           console.log("currentUser: ", currentUser)
       }
@@ -136,8 +158,39 @@ $(document).ready(function() {
       $('#change-profile-form').hide();
   }
 
+  function setCookie(cname, cvalue, expireDays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (expireDays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    // console.log(document.cookie);
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            console.log("c: ", c)
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function killCookie(){
+  setCookie("FITNESS_GURU_ID", "", 0);
+  console.log("killed cookie: ",getCookie("FITNESS_GURU_ID"));
+}
+
   function drawBMI(bmiIn) {
-      // google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart(){
       var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
           [bmiIn.bmiStr, bmiIn.bmi],
@@ -159,6 +212,7 @@ $(document).ready(function() {
       var chart = new google.visualization.Gauge(document.getElementById('bmi-chart'));
       chart.draw(data, options);
   }
+}
 var weightTest = [
     {"time": "Thu Oct 19 2017 12:25:11 GMT-0700 (PDT)", "weight": 166},
     {"time": "Thu Oct 20 2017 12:25:11 GMT-0700 (PDT)", "weight": 186},
@@ -167,6 +221,8 @@ var weightTest = [
 ];
 
 function drawWeight(weightIn) {
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart(){
         var dataArray = [['Date','Weight']]
         for (var j=0; j<weightIn.length; j++) {
           var shortTime = weightIn[j].time.substr(4,6);
@@ -179,11 +235,14 @@ function drawWeight(weightIn) {
           title: 'Weight History (lbs)',
           curveType: 'function',
           legend: { position: 'none' },
-          height: 250
+          height: 250,
+          width: 520
         };
         var chart = new google.visualization.LineChart(document.getElementById('weight-chart'));
         chart.draw(data, options);
     }
+  }
+
   // function drawWeight(weightIn) {
   //     var data = google.visualization.arrayToDataTable([
   //         ['Year', 'Sales', 'Expenses'],
