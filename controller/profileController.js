@@ -1,9 +1,23 @@
 var db = require('../models');
 var bcrypt = require('bcrypt');
 
+function cookieLogIn(req, res){
+    db.Profile.findOne({
+        userId: req.query.userId
+    }, function(err, success) {
+        if (err) {return res.send(err)}
+        if(!success){
+          res.send("cookie fail");
+        }else{
+          console.log("cookie success");
+          res.json(success);
+      }
+    })
+}
+
 
 function logIn(req, res) {
-    console.log(req.query)
+    // console.log(req.query)
     var passwordIn = req.query.pwd;
 
     console.log("got login request pwd: ", passwordIn);
@@ -90,5 +104,6 @@ function create(req, res) {
 
 module.exports = {
     create: create,
-    logIn: logIn
+    logIn: logIn,
+    cookieLogIn: cookieLogIn
 };
