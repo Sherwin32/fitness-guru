@@ -1,5 +1,18 @@
 
+/* CLIENT-SIDE JS * * You may edit this file as you see fit.  Try to separate different components
+ * into functions and objects as needed.
+ *
+ */
+
+ var weightTest = [
+    {"time": "Thu Oct 19 2017 12:25:11 GMT-0700 (PDT)", "weight": 166},
+    {"time": "Thu Nov 19 2017 12:25:11 GMT-0700 (PDT)", "weight": 186},
+    {"time": "Thu Dec 19 2017 12:25:11 GMT-0700 (PDT)", "weight": 196},
+    {"time": "Thu Jan 19 2018 12:25:11 GMT-0700 (PDT)", "weight": 206}
+];
+
 /* CLIENT-SIDE JS*/
+
 
 $(document).ready(function() {
   console.log('app.js loaded!');
@@ -234,6 +247,7 @@ var weightTest = [
 ];
 
 
+
 function drawWeight(weightIn) {
   google.charts.setOnLoadCallback(drawChart);
   function drawChart(){
@@ -251,10 +265,12 @@ function drawWeight(weightIn) {
           title: 'Weight History (lbs)',
           curveType: 'function',
 
+          // legend: { position: 'bottom' },
+
+
           legend: { position: 'none' },
           height: 250,
           width: 520
-
         };
         var chart = new google.visualization.LineChart(document.getElementById('weight-chart'));
         chart.draw(data, options);
@@ -299,6 +315,7 @@ function drawWeight(weightIn) {
       $('#weightSpan').text(userPound);
       $('#goalSpan').text(userProfile.fitnessGoal.toUpperCase());
       drawWeight(weightTest);
+
   }
 
 });
