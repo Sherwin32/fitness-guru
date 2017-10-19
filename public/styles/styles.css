@@ -16,12 +16,13 @@
 	z-index: -1;
 }
 
+
 nav {
 	background-color: lightgrey;
 }
 
 nav button {
-	margin: 10px;
+	margin: 20px;
 	border-radius: 8px;
 	border: none; 
 }
@@ -83,5 +84,5 @@ h1, h2 {
 
 .recContent {
 	margin-top: 15px;
-	height: 200px;
+	height: 280px;
 }

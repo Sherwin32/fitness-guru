@@ -5,6 +5,7 @@ var ProfileSchema = new Schema({
   name: String,
   gender: String,
   id: String,
+  age: String,
   feet: String,
   inch: String,
   weight: String,
