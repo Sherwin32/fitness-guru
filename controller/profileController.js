@@ -50,6 +50,7 @@ const saltRounds = 10;
   name: req.body.name,
   gender: req.body.gender,
   id: req.body.id,
+  age: req.body.age,
   feet: req.body.feet,
   inch: req.body.inch,
   weight: req.body.weight,
