@@ -51,7 +51,9 @@ app.get('/', function homepage(req, res) {
 
 app.post('/profile', controller.profile.create);
 
-app.post('/profile/login', controller.profile.logIn);
+app.get('/profile', controller.profile.logIn);
+
+app.get('/profile/cookie', controller.profile.cookieLogIn);
 
 
 /*

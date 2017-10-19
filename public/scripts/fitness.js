@@ -1,14 +1,13 @@
 
-function feetInchToInch (feet, inch) {
-  return feet * 12 + inch;
-}
+/* Function takes a user profile object 
+   Function returns object!  Two prop: .bmi, .bmiStr */
+function calcBMI (user) {
+  weightPounds = user.weight;
+  heightInches = user.feet * 12 + user.inch;
 
-
-/* Function returns object!  Two prop: .bmi, .bmiStr */
-function calcBMI (weightPounds, heightInches) {
 	var kg = weightPounds / 2.2;
-  	var m = heightInches * 0.0254;
-  	var bmi = Math.round(kg / Math.pow(m,2) * 10)/10;
+  var m = heightInches * 0.0254;
+  var bmi = Math.round(kg / Math.pow(m,2) * 10)/10;
   	if ( bmi<18.5 ) {
   		var bmiStr = "Underweight";
   	} else if ( bmi>=25 ) {

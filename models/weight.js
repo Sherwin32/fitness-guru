@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var WeightSchema = new Schema({
-	id: String,
+	userId: String,
 	time: String,
 	weight: String
 });
