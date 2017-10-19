@@ -1,6 +1,5 @@
+
 /* CLIENT-SIDE JS*/
-
-
 
 $(document).ready(function() {
   console.log('app.js loaded!');
@@ -234,9 +233,11 @@ var weightTest = [
     {"time": "Thu Jan 19 2018 12:25:11 GMT-0700 (PDT)", "weight": 206}
 ];
 
+
 function drawWeight(weightIn) {
   google.charts.setOnLoadCallback(drawChart);
   function drawChart(){
+    
         var dataArray = [['Date','Weight']]
         for (var j=0; j<weightIn.length; j++) {
           var shortTime = weightIn[j].time.substr(4,6);
@@ -244,13 +245,16 @@ function drawWeight(weightIn) {
           var babyArray = [ shortTime, weightIn[j].weight ]
           dataArray.push(babyArray);
         }
+
         var data = google.visualization.arrayToDataTable(dataArray);
         var options = {
           title: 'Weight History (lbs)',
           curveType: 'function',
+
           legend: { position: 'none' },
           height: 250,
           width: 520
+
         };
         var chart = new google.visualization.LineChart(document.getElementById('weight-chart'));
         chart.draw(data, options);
