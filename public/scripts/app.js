@@ -1,9 +1,15 @@
-/* CLIENT-SIDE JS
- *
- * You may edit this file as you see fit.  Try to separate different components
+/* CLIENT-SIDE JS * * You may edit this file as you see fit.  Try to separate different components
  * into functions and objects as needed.
  *
  */
+
+ var weightTest = [
+    {"time": "Thu Oct 19 2017 12:25:11 GMT-0700 (PDT)", "weight": 166},
+    {"time": "Thu Nov 19 2017 12:25:11 GMT-0700 (PDT)", "weight": 186},
+    {"time": "Thu Dec 19 2017 12:25:11 GMT-0700 (PDT)", "weight": 196},
+    {"time": "Thu Jan 19 2018 12:25:11 GMT-0700 (PDT)", "weight": 206}
+];
+
 $(document).ready(function() {
 
   let currentUser = {};
@@ -188,17 +194,20 @@ $(document).ready(function() {
     }
 
     function drawWeight(weightIn) {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['Oct01',  1000,      400],
-          ['Oct02',  1170,      460],
-          ['Oct03',  660,       1120],
-          ['Dec02',  1030,      540]
-        ]);
+        var dataArray = [['Date','Weight']]
+        for (var j=0; j<weightIn.length; j++) {
+          var shortTime = weightIn[j].time.substr(4,6);
+          shortTime[3] = '-';
+          var babyArray = [ shortTime, weightIn[j].weight ]
+          dataArray.push(babyArray);
+        }
+
+        var data = google.visualization.arrayToDataTable(dataArray);
         var options = {
-          title: 'Company Performance',
+          title: 'Weight History (lbs)',
           curveType: 'function',
-          legend: { position: 'bottom' },
+          // legend: { position: 'bottom' },
+          legend: { position: 'none' },
           height: 250
         };
         var chart = new google.visualization.LineChart(document.getElementById('weight-chart'));
@@ -222,7 +231,7 @@ $(document).ready(function() {
       drawBMI(bmiObj);
       $('#weightSpan').text(userPound);
       $('#goalSpan').text(userProfile.fitnessGoal.toUpperCase());
-      drawWeight();
+      drawWeight(weightTest);
     }
 
 });
