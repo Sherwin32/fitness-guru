@@ -20,6 +20,8 @@ if (userCookie) {
   })
       console.log("got an cookie!!!log in!!")
       console.log("userCookie: ", userCookie)
+}else{
+  navBarToggle();
 }
 
 
@@ -68,8 +70,16 @@ if (userCookie) {
   $('#create-form').on('submit', createFormOnSubmit);
   $('#log-in-submit').on('submit', logInOnSubmit);
   $('#update-weight').on('submit', updateWeight);
+  $('#log-out-btn').on('click', logOut);
 
-  $('#test-btn').on('click', navBarToggle);
+  // $('#test-btn').on('click', navBarToggle);
+
+  function logOut(){
+    navBarToggle();
+    killCookie();
+    hideAll();
+    $('#built-in-content').show();
+  }
 
   function navBarToggle(){
     if(isLogIn){
@@ -81,10 +91,9 @@ if (userCookie) {
       $('#log-in-btn').show();
       $('#create-btn').show();
       $('#log-out-btn').hide();
-      isLogIn = true
+      isLogIn = true;
     }
   }
-
 
   function updateWeight(e) {
       e.preventDefault();
@@ -131,7 +140,9 @@ if (userCookie) {
           console.log(json, "inside render");
           setCookie("FITNESS_GURU_ID", `userId=${json.userId}`, 0.03);
           renderRec(json);
-          console.log("currentUser: ", currentUser)
+          console.log("currentUser: ", currentUser);
+          isLogIn=true;
+          navBarToggle();
       }
   }
 
@@ -141,8 +152,11 @@ if (userCookie) {
           alert("id already exists. Please use another one")
       }else{
           console.log(json, "inside render");
+          setCookie("FITNESS_GURU_ID", `userId=${json.userId}`, 0.03);
           renderRec(json);
-          console.log("currentUser: ", currentUser)
+          console.log("currentUser: ", currentUser);
+          isLogIn=true;
+          navBarToggle();
       }
   }
 
