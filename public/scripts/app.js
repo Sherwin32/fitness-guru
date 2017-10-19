@@ -86,9 +86,22 @@ $(document).ready(function() {
         $('#create-form-panel').show();
     })
 
+    $('#update-weight-btn').on('click', function(){
+      console.log("click")
+      $('#show-weight').hide();
+      $('#new-weight').show();
+    })
+
+    $('#update-goal-btn').on('click', function(){
+      console.log("click")
+      $('#show-goal').hide();
+      $('#new-goal').show();
+    })
+
     $('#create-form').on('submit', createFormOnSubmit);
     $('#log-in-submit').on('submit', logInOnSubmit);
     $('#update-weight').on('submit', updateWeight);
+
 
     function updateWeight(e){
       e.preventDefault();
@@ -153,6 +166,7 @@ $(document).ready(function() {
         $('#create-form-panel').hide();
         $('#log-in-panel').hide();
         $('#recommendation').hide();
+        $('#change-profile-form').hide();
     }
 
     function drawBMI(bmiIn){

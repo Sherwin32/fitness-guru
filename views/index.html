@@ -35,6 +35,7 @@
     	<img height=60 src="images/icon-healing.png" />
       	<button id="log-in-btn" class="btn-success pull-right">Log in</button>
       	<button id="create-btn" class="btn-primary pull-right">Sign up</button>
+        <button id="log-out-btn" class="btn-success pull-right">Log out</button>
     </nav>
     <header class="jumbotron">
         <div class="img"></div>
@@ -49,7 +50,7 @@
       <div id="built-in-content" style="display">
           <div class="row">
               <div class="col-md-10 col-md-offset-1">
-                  <p>Fitness Guru is your home for achieving your fitness goals.  Sign up and tell us your fitness goal.  We'll give you an assessment right away.  Next, if you need to adjust your Body Mass Index (BMI), we'll give you the tool for tracking your weight over time.</p> <p>Sign up today!</p>
+                  <p style="margin-top: 20px">Fitness Guru is your home for achieving your fitness goals.  Sign up and tell us your fitness goal.  We'll give you an assessment right away.  Next, if you need to adjust your Body Mass Index (BMI), we'll give you the tool for tracking your weight over time.</p> <p>Sign up today!</p>
               </div>
           </div>
       </div>
@@ -213,17 +214,38 @@
                       <h1>Hello, <br><span id="user-name"></span></h1>
                     </div>
                     <div class="col-md-7 col-xs-12">
-                    	<div id="show-weight" style="display:">
-                      		<p style="display: inline-block">Current weight: <span id="weightSpan"></span>(lb)</p>
-                        	<button class="btn btn-default" type="button" style="margin-left: 10px">update </button>
-                      		<p>Fitness goal: <span id="goalSpan"></span></p>
-                      	</div>
-                      	<div class="row">
-                    	<div id="new-weight" style="display:">
+                    	<div class="row" id="show-weight" style="display:">
+                      		<p style="display: inline-block; font-size: 25px">Current weight: <span id="weightSpan"></span>(lb)</p>
+                        	<button id="update-weight-btn" class="btn btn-default" type="button" style="margin-left: 10px">update </button>
+                    	</div>
+                      <div class="row">
+                      <div id="new-weight" style="display:none">
                             <!-- <div class="col-sm-12"> -->
                             <form id="update-weight">
-                          	<label class="control-label col-sm-3" for="new-weight-input">Add new weight:</label>
+                            <label class="control-label col-sm-3" for="new-weight-input" style="font-size: 18px">New weight:</label>
                               <input id="new-weight-field" type="number" class="col-sm-2" name="new-weight-input" min="40" size=6 maxlength=3 required>
+                              <!-- <input type="number" name="foo" size=6> -->
+                            <!-- </div> -->
+                            <input type="submit" class="btn btn-default col-sm-2" style="margin-left: 10px" value="Submit">
+                            </form>
+                        </div>
+                        </div>
+                      <div class="row" id="show-goal" style="display:">
+                          <p style="display: inline-block; font-size: 25px">Fitness goal: <span id="goalSpan"></span></p>
+                          <button id="update-goal-btn" class="btn btn-default" type="button" style="margin-left: 10px">update </button>
+                          </div>
+                        <div class="row">
+                        <div id="new-goal" style="display:none">
+                            <!-- <div class="col-sm-12"> -->
+                            <form id="update-goal">
+                            <label class="control-label col-sm-3" for="new-weight-input" style="font-size: 18px">Change goal:</label>
+                              <div class="col-sm-4">
+                                <select class="form-control" name="fitnessGoal">
+                                  <option value="strength">Strength</option>
+                                  <option value="building">Building</option>
+                                  <option value="condition" selected>Condition</option>
+                                </select>
+                              </div>
                               <!-- <input type="number" name="foo" size=6> -->
                             <!-- </div> -->
                             <input type="submit" class="btn btn-default col-sm-2" style="margin-left: 10px" value="Submit">
@@ -278,7 +300,6 @@
               </div>
             </div>
             <!-- Recommendation END -->
-
         </div>
     </div>
     <!-- end of panel-body -->
