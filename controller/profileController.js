@@ -1,6 +1,8 @@
 var db = require('../models');
+//Implementing bcrypt for authentication
 var bcrypt = require('bcrypt');
 
+//PUT request for updating user fitness goal.
 function updateFitnessGoal(req, res){
   console.log("req.body: ", req.body)
     db.Profile.updateOne({userId:req.body.userId},{fitnessGoal:req.body.fitnessGoal}, function(err,success){
@@ -17,6 +19,7 @@ function updateFitnessGoal(req, res){
     })
 }
 
+//PUT request for updating user weight in his Profile data and create a Weight data history.
 function updateWeight(req, res){
   console.log("req.body: ", req.body)
     db.Profile.updateOne({userId:req.body.userId},{weight:req.body.weight}, function(err,success){
@@ -46,6 +49,7 @@ function updateWeight(req, res){
     })
 }
 
+//GET request for loging in using cookie.
 function cookieLogIn(req, res){
     db.Profile.findOne({
         userId: req.query.userId
@@ -60,18 +64,14 @@ function cookieLogIn(req, res){
     })
 }
 
-
+//GET request for loging in.
 function logIn(req, res) {
-    // console.log(req.query)
     var passwordIn = req.query.pwd;
-
     console.log("got login request pwd: ", passwordIn);
     db.Profile.findOne({
         userId: req.query.userId
     }, function(err, success) {
-        if (err) {
-            return res.send(err)
-        }
+        if (err) {return res.send(err)}
         if(!success){
           res.send("login error");
         }else{
@@ -92,8 +92,7 @@ function logIn(req, res) {
     })
 }
 
-
-
+//POST request for creating a new account.
 function create(req, res) {
     db.Profile.findOne({
         userId: req.body.userId
@@ -104,10 +103,7 @@ function create(req, res) {
         } else {
             const saltRounds = 10;
             bcrypt.hash(req.body.pwd, saltRounds, function(err, hash) {
-                // Store hash in your password DB.
-                if (err) {
-                    console.log(err)
-                }
+                if (err) {console.log(err)}
                 var newProfile = new db.Profile({
                     name: req.body.name,
                     gender: req.body.gender,
@@ -127,23 +123,16 @@ function create(req, res) {
                 })
                 // console.log(newProfile);
                 newWeight.save(function(err, success) {
-                    if (err) {
-                        return console.log(err)
-                    }
-                    console.log("newWeight: ", newWeight);
+                    if (err) {return console.log(err)}
+                    console.log("saved newWeight: ", newWeight, " in Weight database");
                 })
                 newProfile.save(function(err, success) {
-                    if (err) {
-                        return console.log(err);
-                    }
+                    if (err) {return console.log(err);}
                     res.json(success);
-                    console.log("newProfile: ", newProfile);
-                    // console.log(success);
+                    console.log("saved newProfile: ", newProfile, " in Profile database");
                 })
             })
         }
-
-
     });
 }
 
