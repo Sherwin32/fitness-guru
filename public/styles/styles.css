@@ -20,7 +20,7 @@
 .jumbotron h1 {
 	font-size: 80px;
 	text-shadow: 2px 2px #ff0000;
-	color: orange;
+	color: #ffa54f;
 }
 
 nav {
@@ -42,11 +42,12 @@ button {
 	border: none; 
 }
 
-#log-in-btn {
+/*#log-in-btn {
 	background-color: blue;
-}
+}*/
+
 #create-btn {
-	background-color: orange;
+	background-color: #ffa54f;
 }
 
 

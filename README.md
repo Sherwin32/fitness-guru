@@ -10,7 +10,7 @@ When a new user wants to use the system, a new profile is created.  From that, a
 
 Once a profile has been established, the user can periodically update his or her weight and it will recalculate the BMI and change the recommendations as appropriate.  A weight history graph is also shown to the user.
 
-You can use this application at [Sherwin Shann](http://example.com/ "Sherwin's Heroku") or at [Tahl Milburn](http://example.com/ "Tahl's Heroku").
+You can use this application at [Sherwin Shann](https://agile-dawn-93693.herokuapp.com/ "Sherwin's Heroku") or at [Tahl Milburn](https://quiet-harbor-68780.herokuapp.com/ "Tahl's Heroku").
 
 
 ## Technologies Used
