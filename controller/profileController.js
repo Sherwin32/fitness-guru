@@ -1,6 +1,51 @@
 var db = require('../models');
 var bcrypt = require('bcrypt');
 
+function updateFitnessGoal(req, res){
+  console.log("req.body: ", req.body)
+    db.Profile.updateOne({userId:req.body.userId},{fitnessGoal:req.body.fitnessGoal}, function(err,success){
+      if(err){return err};
+      if(!success){console.log("user not found")}
+      console.log("changed goal: ", success);
+      db.Profile.findOne({userId:req.body.userId},function(err,success){
+        if(err){return err};
+        if(!success){console.log("this shouldn't happen")}
+        else{
+          res.json(success);
+        }
+      })
+    })
+}
+
+function updateWeight(req, res){
+  console.log("req.body: ", req.body)
+    db.Profile.updateOne({userId:req.body.userId},{weight:req.body.weight}, function(err,success){
+      if(err){return err};
+      if(!success){console.log("user not found")}
+      console.log("changed weight: ", success);
+      db.Profile.findOne({userId:req.body.userId},function(err,success){
+        if(err){return err};
+        if(!success){console.log("this shouldn't happen")}
+        else{
+          var timeIn = decodeURI(req.body.time);
+                var newWeight = new db.Weight({
+                    userId: req.body.userId,
+                    time: timeIn,
+                    weight: req.body.weight
+                })
+                // console.log(newProfile);
+                newWeight.save(function(err, success) {
+                    if (err) {
+                        return console.log(err)
+                    }
+                    console.log("newWeight: ", newWeight);
+                })
+          res.json(success);
+        }
+      })
+    })
+}
+
 function cookieLogIn(req, res){
     db.Profile.findOne({
         userId: req.query.userId
@@ -105,5 +150,7 @@ function create(req, res) {
 module.exports = {
     create: create,
     logIn: logIn,
-    cookieLogIn: cookieLogIn
+    cookieLogIn: cookieLogIn,
+    updateWeight: updateWeight,
+    updateFitnessGoal: updateFitnessGoal
 };

@@ -2,6 +2,7 @@
 	position: relative;
 	background-color: transparent;
 	margin-bottom: 10px;
+	padding: 0;
 }
 
 .jumbotron .img {
@@ -16,13 +17,19 @@
 	z-index: -1;
 }
 
+.jumbotron h1 {
+	font-size: 80px;
+	text-shadow: 2px 2px #ff0000;
+	color: orange;
+}
 
 nav {
 	background-color: lightgrey;
+	height: 40px;
 }
 
 nav button {
-	margin: 20px;
+	margin: 10px;
 	border-radius: 8px;
 	border: none; 
 }
@@ -66,11 +73,6 @@ h1, h2 {
 .line-chart {
 	background-color: skyblue; 
 	height:350px;
-}
-
-.jumbotron h1 {
-	text-shadow: 2px 2px #ff0000;
-	color: orange;
 }
 
 .recBlock {

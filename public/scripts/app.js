@@ -1,10 +1,11 @@
 
 /* CLIENT-SIDE JS*/
-
 $(document).ready(function() {
+
   console.log('app.js loaded!');
 const timeToExpire = 0.1;    //time until expire
 var isLogIn = false;
+var currentUser = {};
 var userCookie = getCookie("FITNESS_GURU_ID")
 if (userCookie) {
   $.ajax({
@@ -16,28 +17,8 @@ if (userCookie) {
   })
       console.log("got an cookie!!!log in!!")
       console.log("userCookie: ", userCookie)
-}else{
-  navBarToggle();
 }
-
-
 //cookie end
-
-  let currentUser = {};
-
-  //push object when created
-  var builtInInfo = {
-      feet: "5",
-      inch: "8",
-      fitnessGoal: "building",
-      gender: "male",
-      age: "26",
-      id: "sherwin123",
-      name: "Sherwin",
-      pwd: "123",
-      confirmPwd: "123",
-      weight: "143",
-  };
 
   // On click listener for log in (sign in) button
   $('#log-in-btn').on('click', function() {
@@ -57,6 +38,7 @@ if (userCookie) {
       $('#new-weight').show();
   })
 
+
   $('#update-goal-btn').on('click', function() {
       console.log("click")
       $('#show-goal').hide();
@@ -66,6 +48,7 @@ if (userCookie) {
   $('#create-form').on('submit', createFormOnSubmit);
   $('#log-in-submit').on('submit', logInOnSubmit);
   $('#update-weight').on('submit', updateWeight);
+  $('#update-goal').on('submit', updateGoal);
   $('#log-out-btn').on('click', logOut);
 
   // $('#test-btn').on('click', navBarToggle);
@@ -91,9 +74,32 @@ if (userCookie) {
     }
   }
 
+  function updateGoal(e){
+    e.preventDefault();
+      requestData = `${$(this).serialize()}&userId=${currentUser.userId}`;
+      console.log("current id: ",currentUser.userId)
+      $.ajax({
+        method: 'PUT',
+        url: `/profile/goal`,
+        data: requestData,
+        success: logInProfile,
+        error: handleError
+      })
+  }
+
   function updateWeight(e) {
       e.preventDefault();
-      console.log($(this).serialize())
+      var t = Date();
+      timeSerialize = `&time=${encodeURI(t)}`;
+      requestData = `${$(this).serialize()}${timeSerialize}&userId=${currentUser.userId}`;
+      console.log("current id: ",currentUser.userId)
+      $.ajax({
+        method: 'PUT',
+        url: `/profile/weight`,
+        data: requestData,
+        success: logInProfile,
+        error: handleError
+      })
   }
 
 
@@ -135,8 +141,8 @@ if (userCookie) {
       }else{
           console.log(json, "inside render");
           setCookie("FITNESS_GURU_ID", `userId=${json.userId}`, 0.03);
-          renderRec(json);
-          console.log("currentUser: ", currentUser);
+          currentUser = json;
+          renderRec(currentUser);
           isLogIn=true;
           navBarToggle();
       }
@@ -149,7 +155,8 @@ if (userCookie) {
       }else{
           console.log(json, "inside render");
           setCookie("FITNESS_GURU_ID", `userId=${json.userId}`, 0.03);
-          renderRec(json);
+          currentUser = json
+          renderRec(currentUser);
           console.log("currentUser: ", currentUser);
           isLogIn=true;
           navBarToggle();
@@ -259,13 +266,18 @@ function drawWeight(weightIn) {
   }
 
   function renderRec(userProfile) {
-      currentUser = userProfile;
+      userProfile.inch = parseInt(userProfile.inch);
+      userProfile.feet = parseInt(userProfile.feet);
+      userProfile.weight = parseInt(userProfile.weight);
       hideAll();
       $('#recommendation').show();
+      $('#show-goal').show();
+      $('#new-goal').hide();
+      $('#show-weight').show();
+      $('#new-weight').hide();
       var userPound = parseInt(userProfile.weight);
-      var userInch = feetInchToInch(parseInt(userProfile.feet), parseInt(userProfile.inch));
       // This is gonna return {'bmi':bmi,'bmiStr':bmiStr}
-      var bmiObj = calcBMI(userPound, userInch);
+      var bmiObj = calcBMI(userProfile);
       var recObj = profileToRecomm(userProfile, bmiObj);
       $('#rec-resistance').html(recObj.resistance);
       $('#rec-cardio').html(recObj.cardio);
@@ -276,6 +288,7 @@ function drawWeight(weightIn) {
       $('#weightSpan').text(userPound);
       $('#goalSpan').text(userProfile.fitnessGoal.toUpperCase());
       drawWeight(weightTest);
+
   }
 
 });
