@@ -23,13 +23,16 @@ function calcBMI (user) {
 var resistance = [
 	`Recommend a moderate amount of resistance exercise.  
   Do a variety of exercises, for various body parts.  
-  Lift the maximum amount of weight possible for 6-8 reps per set.`, 
+  Lift the maximum amount of weight possible for 6-8 reps per set.
+  This rep-range will help you build strength.`, 
   `Recommend a moderate amount of resistance exercise.  
   Do a variety of exercises, for various body parts.  
-  Lift the maximum amount of weight possible for 10-12 reps per set.`,
+  Lift the maximum amount of weight possible for 10-12 reps per set.
+  This rep-range will help you build muscle.`,
 	`Recommend a moderate amount of resistance exercise.  
   Do a variety of exercises, for various body parts.  
-  Lift the maximum amount of weight possible for 14+ reps per set.`
+  Lift the maximum amount of weight possible for 14+ reps per set.
+  This rep-range will help you increase your condition.`
   ];
 
 var cardio = [
