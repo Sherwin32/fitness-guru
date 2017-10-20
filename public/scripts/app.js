@@ -1,8 +1,13 @@
 let currentUser = {};
 let currentWeightHistory = {};
+const adminId = ["sherwin", "tahl"];
+let isAdmin = false;
 
 /* CLIENT-SIDE JS*/
 $(document).ready(function() {
+
+  hideAll();
+  $('#built-in-content').show();
 
     console.log('app.js loaded!');
     const timeToExpire = 0.1; //time until expire
