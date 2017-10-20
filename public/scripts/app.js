@@ -2,6 +2,8 @@
 let currentUser = {};
 //user weight history stored here once logged in
 let currentWeightHistory = {};
+//Admin account
+let adminArray = ["sherwin", "tam94131"];
 
 /* CLIENT-SIDE JS*/
 $(document).ready(function() {
@@ -218,6 +220,7 @@ $(document).ready(function() {
         $('#log-in-panel').hide();
         $('#recommendation').hide();
         $('#change-profile-form').hide();
+        $('#admin-panel').hide();
     }
 //Set cookie
     function setCookie(cname, cvalue, expireDays) {
@@ -337,6 +340,43 @@ $(document).ready(function() {
       nameArray = nameIn.split(" ");
       return nameArray[0];
     }
+
+//Check if current user is an administrator.
+//If true, render admin dashboard. If false, do nothing.
+    function checkAdmin(userIdIn){
+      var isAdmin = false;
+      for(var i=0; i<adminArray.length; i++){
+        if(userIdIn===adminArray[i]){
+          isAdmin = true;
+          break;
+        }
+      }
+      if(isAdmin){
+        renderDashboard();
+      }
+    }
+
+//Render dashboard(if user is an admin)
+    function renderDashboard(){
+      $('#admin-panel').show();
+      $.ajax({
+        method: 'GET',
+        url: `profile/all/dashboard`,
+        success: getDashboardOnSuccess,
+        error: handleError
+      })
+    }
+
+    function getDashboardOnSuccess(json){
+      console.log(json);
+      $('#db1').text(json.totalUser);
+      $('#db2').text(json.totalWeight);
+      $('#db3').text(json.male);
+      $('#db4').text(json.female);
+      $('#db5').text(json.other);
+      $('#db6').text(json.avgWeight);
+    }
+
 //Render recommendation page
     function renderRec(userProfile) {
         getWeight();
@@ -344,6 +384,7 @@ $(document).ready(function() {
         userProfile.feet = parseInt(userProfile.feet);
         userProfile.weight = parseInt(userProfile.weight);
         hideAll();
+        checkAdmin(userProfile.userId);
         $('#recommendation').show();
         $('#show-goal').show();
         $('#new-goal').hide();
