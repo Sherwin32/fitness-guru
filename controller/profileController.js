@@ -161,7 +161,7 @@ function getDashboard(req, res){
         avgWeight = avgWeight+parseInt(person.weight);
       })
       avgWeight = avgWeight / allWeight.length;
-      jsonReturn.avgWeight = avgWeight;
+      jsonReturn.avgWeight = parseInt(avgWeight);
       db.Profile.find({gender:"male"}, function(err, allMale){
         if(err){return console.log(err)}
         if(allMale){male=allMale.length;}

@@ -69,7 +69,8 @@ h1, h2 {
 }
 
 .bmi-chart {
-	background-color: orange; 
+	/*background-color: orange; */
+	background-color: #ffa54f;
 	height:350px;
 }
 
