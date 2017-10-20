@@ -55,6 +55,12 @@ app.get('/profile', controller.profile.logIn);
 
 app.get('/profile/cookie', controller.profile.cookieLogIn);
 
+app.put('/profile/weight', controller.profile.updateWeight);
+
+app.put('/profile/goal', controller.profile.updateFitnessGoal);
+
+app.get('/weight', controller.weight.getWeightHistory);
+
 
 /*
  * JSON API Endpoints

@@ -8,6 +8,7 @@ function calcBMI (user) {
 	var kg = weightPounds / 2.2;
   var m = heightInches * 0.0254;
   var bmi = Math.round(kg / Math.pow(m,2) * 10)/10;
+  console.log(bmi);
   	if ( bmi<18.5 ) {
   		var bmiStr = "Underweight";
   	} else if ( bmi>=25 ) {
