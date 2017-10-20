@@ -88,3 +88,8 @@ h1, h2 {
 	margin-top: 15px;
 	height: 280px;
 }
+
+footer {
+	height: 80px;
+	background-color: lightgrey;
+}
