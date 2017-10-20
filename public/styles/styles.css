@@ -25,7 +25,8 @@
 
 nav {
 	/*background-color: lightgrey;*/
-	background-color: rgba(202,224,231,1);
+	/*background-color: rgba(202,224,231,1);*/
+	background-color: #b9d3ee;
 	height: 40px;
 }
 
@@ -96,6 +97,15 @@ h1, h2 {
 	font-weight: 200;
 }
 
+table {
+    font-size: 24px;
+    margin: 30px;
+}
+td {
+    padding: 10px;
+    text-align: center;
+}
+
 a:hover {
      text-decoration:none;
      text-shadow: 1px 1px 1px #555;
@@ -104,5 +114,6 @@ a:hover {
 footer {
 	height: 80px;
 	/*background-color: lightgrey;*/
-	background-color: rgba(202,224,231,1);
+	/*background-color: rgba(202,224,231,1);*/
+	background-color: #b9d3ee;
 }

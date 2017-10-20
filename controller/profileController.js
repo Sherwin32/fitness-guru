@@ -144,11 +144,53 @@ function getAll(req, res){
   })
 }
 
+//GET request for all profile(for the admin dashboard).
+function getDashboard(req, res){
+  var jsonReturn = {};
+  var male = 0;
+  var female = 0;
+  var other = 0;
+  db.Profile.find({}, function(err, all){
+    if(err){return console.log(err)}
+    jsonReturn.totalUser=all.length;
+    db.Weight.find({}, function(err, allWeight){
+      if(err){return console.log(err)}
+      jsonReturn.totalWeight = allWeight.length;
+      var avgWeight = 0;
+      allWeight.forEach(function(person){
+        avgWeight = avgWeight+parseInt(person.weight);
+      })
+      avgWeight = avgWeight / allWeight.length;
+      jsonReturn.avgWeight = avgWeight;
+      db.Profile.find({gender:"male"}, function(err, allMale){
+        if(err){return console.log(err)}
+        if(allMale){male=allMale.length;}
+        db.Profile.find({gender:"female"}, function(err, allFemale){
+          if(err){return console.log(err)}
+          if(allFemale){female=allFemale.length;}
+          db.Profile.find({gender:"other"}, function(err, allOther){
+            if(err){return console.log(err)}
+            if(allOther){other=allOther.length;}
+            var malePercentage = Math.round(male/(male+female+other)*100);
+            var femalePercentage = Math.round(female/(male+female+other)*100);
+            var otherPercentage = Math.round(other/(male+female+other)*100);
+            jsonReturn.male = malePercentage || 0;
+            jsonReturn.female = femalePercentage || 0;
+            jsonReturn.other = otherPercentage || 0;
+            res.json(jsonReturn);
+          })
+        })
+      })
+    })
+  })
+}
+
 module.exports = {
     create: create,
     logIn: logIn,
     cookieLogIn: cookieLogIn,
     updateWeight: updateWeight,
     updateFitnessGoal: updateFitnessGoal,
-    getAll: getAll
+    getAll: getAll,
+    getDashboard: getDashboard
 };
