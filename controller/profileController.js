@@ -136,10 +136,18 @@ function create(req, res) {
     });
 }
 
+function getAll(req, res){
+  db.Profile.find({}, function(err, all){
+    if(err){return console.log(err)}
+    res.json(all);
+  })
+}
+
 module.exports = {
     create: create,
     logIn: logIn,
     cookieLogIn: cookieLogIn,
     updateWeight: updateWeight,
-    updateFitnessGoal: updateFitnessGoal
+    updateFitnessGoal: updateFitnessGoal,
+    getAll: getAll
 };

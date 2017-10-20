@@ -51,6 +51,8 @@ app.post('/profile', controller.profile.create);
 
 //GET request for loging in.
 app.get('/profile', controller.profile.logIn);
+//GET request for all profile(for the scatter chart).
+app.get('/profile/all', controller.profile.getAll);
 //GET request for loging in using cookie.
 app.get('/profile/cookie', controller.profile.cookieLogIn);
 //GET request for all weight history of current user.
