@@ -6,7 +6,6 @@ var db = require("./models");
 var controller = require('./controller');
 
 var weightList =[
-  // data here soon!
   {"userId": "sherwin", "time": "Thu Oct 01 2017 12:25:11 GMT-0700 (PDT)", "weight": "166"},
   {"userId": "sherwin", "time": "Thu Oct 02 2017 12:25:11 GMT-0700 (PDT)", "weight": "165"},
   {"userId": "sherwin", "time": "Thu Oct 05 2017 12:25:11 GMT-0700 (PDT)", "weight": "164"},
@@ -54,20 +53,18 @@ var profileList = [
 {"name":"9", "gender":"female", "userId":"jingerale", "age":"27", "feet":"5", "inch":"11", "weight":"155", "fitnessGoal":"strength", "token":"1"},
 ]
 
-db.Weight.remove({}, function(err, success){
-  // code in here runs after all weights are removed
-  db.Weight.create(weightList, function(err, weight){
-  	// console.log("all weight:", weight);
-    console.log("created ", weight.length, " weight history");
-    db.Profile.remove({}, function(err, success){
-  // code in here runs after all profiles are removed
-  db.Profile.create(profileList, function(err, profile){
-    console.log("created ", profile.length, " profile history");
-    process.exit();
-  });
-});
-    // process.exit();
-  });
+db.Weight.remove({}, function(err, success) {
+    // code in here runs after all weights are removed
+    db.Weight.create(weightList, function(err, weight) {
+        console.log("created ", weight.length, " weight history");
+        db.Profile.remove({}, function(err, success) {
+            // code in here runs after all profiles are removed
+            db.Profile.create(profileList, function(err, profile) {
+                console.log("created ", profile.length, " profile history");
+                process.exit();
+            });
+        });
+    });
 });
 
 

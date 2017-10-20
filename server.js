@@ -4,13 +4,11 @@ var app = express();
 
 // parse incoming urlencoded form data
 // and populate the req.body object
+
 var bodyParser = require('body-parser');
-// app.use(bodyParser.urlencoded());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
-
 
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
@@ -19,12 +17,6 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
-// bcrypt
-var bcrypt = require('bcrypt');
-const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
 
 /************
  * DATABASE *
@@ -36,6 +28,7 @@ var controller = require('./controller');
 /**********
  * ROUTES *
  **********/
+
 // Serve static files from the `/public` directory:
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
@@ -49,28 +42,24 @@ app.get('/', function homepage(req, res) {
     res.sendFile(__dirname + '/views/index.html');
 });
 
-app.post('/profile', controller.profile.create);
-
-app.get('/profile', controller.profile.logIn);
-
-app.get('/profile/cookie', controller.profile.cookieLogIn);
-
-app.put('/profile/weight', controller.profile.updateWeight);
-
-app.put('/profile/goal', controller.profile.updateFitnessGoal);
-
-app.get('/weight', controller.weight.getWeightHistory);
-
-
 /*
  * JSON API Endpoints
  */
 
-//  app.get('/api/album', controller.album.getAlbums);
+//POST request for creating a new account.
+app.post('/profile', controller.profile.create);
 
-//  app.post('/api/album', controller.album.create);
+//GET request for loging in.
+app.get('/profile', controller.profile.logIn);
+//GET request for loging in using cookie.
+app.get('/profile/cookie', controller.profile.cookieLogIn);
+//GET request for all weight history of current user.
+app.get('/weight', controller.weight.getWeightHistory);
 
-// app.get('/api', controller.api.sendAPI);
+//PUT request for updating user weight in his Profile data and create a Weight data history.
+app.put('/profile/weight', controller.profile.updateWeight);
+//PUT request for updating user fitness goal.
+app.put('/profile/goal', controller.profile.updateFitnessGoal);
 
 /**********
  * SERVER *
