@@ -24,7 +24,8 @@
 }
 
 nav {
-	background-color: lightgrey;
+	/*background-color: lightgrey;*/
+	background-color: rgba(202,224,231,1);
 	height: 40px;
 }
 
@@ -50,6 +51,7 @@ button {
 
 body {
 	font-family: 'Allerta Stencil', sans-serif;
+	background-color: rgba(246,254,255,.8);
 }
 
 #panel-body {
@@ -91,5 +93,6 @@ h1, h2 {
 
 footer {
 	height: 80px;
-	background-color: lightgrey;
+	/*background-color: lightgrey;*/
+	background-color: rgba(202,224,231,1);
 }
