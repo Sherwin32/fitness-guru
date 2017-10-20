@@ -91,6 +91,11 @@ h1, h2 {
 	height: 280px;
 }
 
+#recommendation .control-label{
+	font-family: 'Allerta Stencil', sans-serif;
+	font-weight: 200;
+}
+
 a:hover {
      text-decoration:none;
      text-shadow: 1px 1px 1px #555;
