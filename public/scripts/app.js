@@ -1,17 +1,20 @@
+//user profile stored here once logged in
 let currentUser = {};
+//user weight history stored here once logged in
 let currentWeightHistory = {};
-const adminId = ["sherwin", "tahl"];
-let isAdmin = false;
 
 /* CLIENT-SIDE JS*/
 $(document).ready(function() {
-
-  hideAll();
-  $('#built-in-content').show();
+    //sanity check!
     console.log('app.js loaded!');
-    const timeToExpire = 0.1; //time until expire
-    var isLogIn = false;
-    var userCookie = getCookie("FITNESS_GURU_ID");
+
+    //initiate page
+    hideAll();
+    $('#built-in-content').show();
+    let isLogIn = false;
+
+//COOKIE LOG IN START
+    let userCookie = getCookie("FITNESS_GURU_ID");
     console.log("userCookie: ", userCookie);
     if (userCookie) {
         $.ajax({
@@ -23,39 +26,47 @@ $(document).ready(function() {
         })
         console.log("got an cookie!!!log in!!")
     }else{
+      //Call logOut function to reinitiate the page and draw scatter chart
       logOut();
     }
-    //cookie end
+//COOKIE LOG IN END
 
-    // On click listener for log in (sign in) button
+//On click listener for log in (sign in) button
     $('#log-in-btn').on('click', function() {
         hideAll();
         $('#log-in-panel').show();
     })
 
-    // On click listener for create button
+//On click listener for create button(sign up)
     $('#create-btn').on('click', function() {
         hideAll();
         $('#create-form-panel').show();
     })
 
+//On click listener for update weight button
     $('#update-weight-btn').on('click', function() {
         $('#show-weight').hide();
         $('#new-weight').show();
     })
 
-
+//On click listener for update fitness goal button
     $('#update-goal-btn').on('click', function() {
         $('#show-goal').hide();
         $('#new-goal').show();
     })
 
+//On submit listener for submitting new account data
     $('#create-form').on('submit', createFormOnSubmit);
+//On submit listener for submitting log in request
     $('#log-in-submit').on('submit', logInOnSubmit);
+//On submit listener for updating current weight/creating new weight history
     $('#update-weight').on('submit', updateWeight);
+//On submit listener for updating current fitness goal
     $('#update-goal').on('submit', updateGoal);
+//On click listener for logging out.
     $('#log-out-btn').on('click', logOut);
 
+//Reinitialize the page and kill cookie
     function logOut() {
         navBarToggle();
         killCookie();
@@ -64,6 +75,7 @@ $(document).ready(function() {
         homepageChart();
     }
 
+//Send GET request to server and retrieve all profile data
     function homepageChart(){
       $.ajax({
         method: 'GET',
@@ -72,11 +84,11 @@ $(document).ready(function() {
         error: handleError      
       })
     }
-
+//Draw scatter chart in homepage using the returned profile data
     function homepageChartOnSuccess(json){
       drawScatter(json);
     }
-
+//Call this to show/hide buttons when log in statement changes
     function navBarToggle() {
         if (isLogIn) {
             $('#log-in-btn').hide();
@@ -90,7 +102,7 @@ $(document).ready(function() {
             isLogIn = true;
         }
     }
-
+//Send GET request to retrieve all weight history of current user
     function getWeight() {
         $.ajax({
             method: 'GET',
@@ -100,7 +112,7 @@ $(document).ready(function() {
             error: handleError
         })
     }
-
+//ParseInt weight data, then draw the weight history chart of current user
     function getWeightOnSuccess(jsonList) {
         currentWeightHistory = jsonList.map(function(history) {
             history.weight = parseInt(history.weight);
@@ -109,7 +121,7 @@ $(document).ready(function() {
         console.log("currentWeightHistory: ", currentWeightHistory);
         drawWeight(currentWeightHistory);
     }
-
+//Send PUT request, change current fitness goal, then refresh the recommendation page
     function updateGoal(e) {
         e.preventDefault();
         requestData = `${$(this).serialize()}&userId=${currentUser.userId}`;
@@ -121,7 +133,7 @@ $(document).ready(function() {
             error: handleError
         })
     }
-
+//Send PUT request, change current weight in profile, create new weight history data, then refresh page
     function updateWeight(e) {
         e.preventDefault();
         var t = Date();
@@ -136,7 +148,7 @@ $(document).ready(function() {
         })
     }
 
-
+//Send GET request to server. If loged in successfully, go to recommendation page
     function logInOnSubmit(e) {
         e.preventDefault();
         console.log($(this).serialize())
@@ -149,7 +161,7 @@ $(document).ready(function() {
         })
         console.log("get request!!!log in!!")
     }
-
+//Send POST request to server. If new account created, go to recommendation page
     function createFormOnSubmit(e) {
         e.preventDefault();
         var t = Date();
@@ -163,7 +175,7 @@ $(document).ready(function() {
             error: handleError
         })
     }
-
+//If log in error, console log the error. If success, create cookie, and log in the recommendation page
     function logInProfile(json) {
         if (json === "login error") {
             console.log(json, "inside login error");
@@ -173,14 +185,14 @@ $(document).ready(function() {
             console.log("cookie: ", userCookie);
         } else {
             console.log(json, "inside render");
-            setCookie("FITNESS_GURU_ID", `userId=${json.userId}`, 0.03);
+            setCookie("FITNESS_GURU_ID", `userId=${json.userId}`, 30);
             currentUser = json;
             renderRec(currentUser);
             isLogIn = true;
             navBarToggle();
         }
     }
-
+//If create error, console log the error. If success, create cookie, and log in the recommendation page
     function createProfile(json) {
         if (json === "exist error") {
             console.log(json);
@@ -195,11 +207,11 @@ $(document).ready(function() {
             navBarToggle();
         }
     }
-
+//This function handles all the error occured in ajax
     function handleError(a, b, c) {
         console.log(a, b, c);
     }
-
+//Hide all layout in panel-body
     function hideAll() {
         $('#built-in-content').hide();
         $('#create-form-panel').hide();
@@ -207,14 +219,14 @@ $(document).ready(function() {
         $('#recommendation').hide();
         $('#change-profile-form').hide();
     }
-
+//Set cookie
     function setCookie(cname, cvalue, expireDays) {
         var d = new Date();
         d.setTime(d.getTime() + (expireDays * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
-
+//Get cookie(if there's no matching cookie, return empty string)
     function getCookie(cname) {
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
@@ -230,13 +242,12 @@ $(document).ready(function() {
         }
         return "";
     }
-
+//Kill cookie
     function killCookie() {
         setCookie("FITNESS_GURU_ID", "", 0);
         console.log("killed cookie: ", getCookie("FITNESS_GURU_ID"));
     }
-
-
+//Draw the BMI chart
     function drawBMI(bmiIn) {
         google.charts.setOnLoadCallback(drawChart);
 
@@ -263,7 +274,7 @@ $(document).ready(function() {
             chart.draw(data, options);
         }
     }
-
+//Draw a age/weight scatter chart. Blue dots represent male, and pink represent female
     function drawScatter(scatterDS) {
       google.charts.setOnLoadCallback(drawChart);
       function drawChart(){
@@ -288,7 +299,7 @@ $(document).ready(function() {
         var chart = new google.visualization.ScatterChart(document.getElementById('scatterDiv'));
         chart.draw(data, options);
     }   }
-
+//Draw the weight history chart of current user
     function drawWeight(weightIn) {
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
@@ -320,13 +331,13 @@ $(document).ready(function() {
             chart.draw(data, options);
         }
     }
-
+//Get full name, return first name only.
     function getFirstName(nameIn){
       nameIn = nameIn.concat(" ");
       nameArray = nameIn.split(" ");
       return nameArray[0];
     }
-
+//Render recommendation page
     function renderRec(userProfile) {
         getWeight();
         userProfile.inch = parseInt(userProfile.inch);

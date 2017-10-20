@@ -2,20 +2,18 @@ var db = require('../models');
 //Implementing bcrypt for authentication
 var bcrypt = require('bcrypt');
 
-//PUT request for updating user fitness goal.
-function updateFitnessGoal(req, res){
-  console.log("req.body: ", req.body)
-    db.Profile.updateOne({userId:req.body.userId},{fitnessGoal:req.body.fitnessGoal}, function(err,success){
-      if(err){return err};
-      if(!success){console.log("user not found")}
-      console.log("changed goal: ", success);
-      db.Profile.findOne({userId:req.body.userId},function(err,success){
-        if(err){return err};
-        if(!success){console.log("this shouldn't happen")}
-        else{
+//GET request for loging in using cookie.
+function cookieLogIn(req, res){
+    db.Profile.findOne({
+        userId: req.query.userId
+    }, function(err, success) {
+        if (err) {return res.send(err)}
+        if(!success){
+          res.send("cookie fail");
+        }else{
+          console.log("cookie success");
           res.json(success);
-        }
-      })
+      }
     })
 }
 
@@ -49,46 +47,20 @@ function updateWeight(req, res){
     })
 }
 
-//GET request for loging in using cookie.
-function cookieLogIn(req, res){
-    db.Profile.findOne({
-        userId: req.query.userId
-    }, function(err, success) {
-        if (err) {return res.send(err)}
-        if(!success){
-          res.send("cookie fail");
-        }else{
-          console.log("cookie success");
+//PUT request for updating user fitness goal.
+function updateFitnessGoal(req, res){
+  console.log("req.body: ", req.body)
+    db.Profile.updateOne({userId:req.body.userId},{fitnessGoal:req.body.fitnessGoal}, function(err,success){
+      if(err){return err};
+      if(!success){console.log("user not found")}
+      console.log("changed goal: ", success);
+      db.Profile.findOne({userId:req.body.userId},function(err,success){
+        if(err){return err};
+        if(!success){console.log("this shouldn't happen")}
+        else{
           res.json(success);
-      }
-    })
-}
-
-//GET request for loging in.
-function logIn(req, res) {
-    var passwordIn = req.query.pwd;
-    console.log("got login request pwd: ", passwordIn);
-    db.Profile.findOne({
-        userId: req.query.userId
-    }, function(err, success) {
-        if (err) {return res.send(err)}
-        if(!success){
-          res.send("login error");
-        }else{
-        console.log("success.token: ", success.token)
-        bcrypt.compare(passwordIn, success.token, function(err, isMatch) {
-            if (err) {
-                console.log(err)
-            }
-            console.log("isMatch: ", isMatch);
-            console.log(success)
-            if (isMatch) {
-                res.json(success);
-            } else {
-                res.send("login error");
-            }
-        })
-      }
+        }
+      })
     })
 }
 
@@ -136,6 +108,35 @@ function create(req, res) {
     });
 }
 
+//GET request for loging in.
+function logIn(req, res) {
+    var passwordIn = req.query.pwd;
+    console.log("got login request pwd: ", passwordIn);
+    db.Profile.findOne({
+        userId: req.query.userId
+    }, function(err, success) {
+        if (err) {return res.send(err)}
+        if(!success){
+          res.send("login error");
+        }else{
+        console.log("success.token: ", success.token)
+        bcrypt.compare(passwordIn, success.token, function(err, isMatch) {
+            if (err) {
+                console.log(err)
+            }
+            console.log("isMatch: ", isMatch);
+            console.log(success)
+            if (isMatch) {
+                res.json(success);
+            } else {
+                res.send("login error");
+            }
+        })
+      }
+    })
+}
+
+//GET request for all profile(for the scatter chart).
 function getAll(req, res){
   db.Profile.find({}, function(err, all){
     if(err){return console.log(err)}
