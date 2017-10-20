@@ -7,6 +7,7 @@ let isAdmin = false;
 $(document).ready(function() {
 
   hideAll();
+
   $('#built-in-content').show();
 
     console.log('app.js loaded!');
@@ -21,8 +22,8 @@ $(document).ready(function() {
             success: logInProfile,
             error: handleError
         })
-        console.log("got an cookie!!!log in!!")
-        console.log("userCookie: ", userCookie)
+        // console.log("got an cookie!!!log in!!")
+        // console.log("userCookie: ", userCookie)
     }
     //cookie end
     console.log("check2", currentWeightHistory);
@@ -99,8 +100,6 @@ $(document).ready(function() {
         })
         console.log("currentWeightHistory: ", currentWeightHistory);
         drawWeight(currentWeightHistory);
-
-
     }
 
     function updateGoal(e) {
@@ -235,6 +234,7 @@ $(document).ready(function() {
         console.log("killed cookie: ", getCookie("FITNESS_GURU_ID"));
     }
 
+
     function drawBMI(bmiIn) {
         google.charts.setOnLoadCallback(drawChart);
 
@@ -261,24 +261,74 @@ $(document).ready(function() {
             chart.draw(data, options);
         }
     }
-    var weightTest = [{
-            "time": "Thu Oct 19 2017 12:25:11 GMT-0700 (PDT)",
-            "weight": 166
-        },
-        {
-            "time": "Thu Oct 20 2017 12:25:11 GMT-0700 (PDT)",
-            "weight": 186
-        },
-        {
-            "time": "Thu Dec 19 2017 12:25:11 GMT-0700 (PDT)",
-            "weight": 196
-        },
-        {
-            "time": "Thu Jan 19 2018 12:25:11 GMT-0700 (PDT)",
-            "weight": 206
-        }
-    ];
+    // var weightTest = [{
+    //         "time": "Thu Oct 19 2017 12:25:11 GMT-0700 (PDT)",
+    //         "weight": 166
+    //     },
+    //     {
+    //         "time": "Thu Oct 20 2017 12:25:11 GMT-0700 (PDT)",
+    //         "weight": 186
+    //     },
+    //     {
+    //         "time": "Thu Dec 19 2017 12:25:11 GMT-0700 (PDT)",
+    //         "weight": 196
+    //     },
+    //     {
+    //         "time": "Thu Jan 19 2018 12:25:11 GMT-0700 (PDT)",
+    //         "weight": 206
+    //     }
+    // ];
 
+var testScatter = [
+{"name":"1", "gender":"male", "userId":"john22", "age":"26", "feet":"5", "inch":"5", "weight":"155", "fitnessGoal":"building", "token":"1"},
+{"name":"2", "gender":"male", "userId":"kelvin01", "age":"36", "feet":"6", "inch":"8", "weight":"157", "fitnessGoal":"building", "token":"1"},
+{"name":"3", "gender":"male", "userId":"dave33", "age":"37", "feet":"5", "inch":"7", "weight":"168", "fitnessGoal":"condition", "token":"1"},
+{"name":"4", "gender":"male", "userId":"sherwin666", "age":"43", "feet":"6", "inch":"2", "weight":"188", "fitnessGoal":"condition", "token":"1"},
+{"name":"5", "gender":"male", "userId":"jack3", "age":"66", "feet":"5", "inch":"3", "weight":"200", "fitnessGoal":"condition", "token":"1"},
+{"name":"6", "gender":"male", "userId":"ken22", "age":"43", "feet":"6", "inch":"6", "weight":"188", "fitnessGoal":"building", "token":"1"},
+{"name":"7", "gender":"male", "userId":"bill3", "age":"22", "feet":"5", "inch":"5", "weight":"169", "fitnessGoal":"strength", "token":"1"},
+{"name":"kay00", "gender":"male", "userId":"kay00", "age":"24", "feet":"7", "inch":"6", "weight":"151", "fitnessGoal":"building", "token":"1"},
+{"name":"alex33", "gender":"male", "userId":"alex33", "age":"25", "feet":"5", "inch":"7", "weight":"179", "fitnessGoal":"strength", "token":"1"},
+{"name":"8", "gender":"male", "userId":"stt", "age":"38", "feet":"6", "inch":"11", "weight":"210", "fitnessGoal":"building", "token":"1"},
+{"name":"9", "gender":"female", "userId":"dddxbb", "age":"23", "feet":"6", "inch":"1", "weight":"166", "fitnessGoal":"strength", "token":"1"},
+{"name":"1", "gender":"female", "userId":"asdfedc", "age":"25", "feet":"5", "inch":"5", "weight":"165", "fitnessGoal":"strength", "token":"1"},
+{"name":"2", "gender":"female", "userId":"ujmyhn", "age":"29", "feet":"5", "inch":"9", "weight":"145", "fitnessGoal":"strength", "token":"1"},
+{"name":"3", "gender":"female", "userId":"yhnujm", "age":"50", "feet":"4", "inch":"11", "weight":"152", "fitnessGoal":"building", "token":"1"},
+{"name":"4", "gender":"female", "userId":"dcdc", "age":"55", "feet":"5", "inch":"2", "weight":"168", "fitnessGoal":"building", "token":"1"},
+{"name":"5", "gender":"female", "userId":"marval", "age":"21", "feet":"6", "inch":"5", "weight":"188", "fitnessGoal":"condition", "token":"1"},
+{"name":"6", "gender":"female", "userId":"maria333", "age":"34", "feet":"7", "inch":"6", "weight":"177", "fitnessGoal":"condition", "token":"1"},
+{"name":"7", "gender":"female", "userId":"summmmer", "age":"44", "feet":"5", "inch":"8", "weight":"166", "fitnessGoal":"condition", "token":"1"},
+{"name":"8", "gender":"female", "userId":"kim007", "age":"48", "feet":"4", "inch":"9", "weight":"159", "fitnessGoal":"strength", "token":"1"},
+{"name":"9", "gender":"female", "userId":"jingerale", "age":"27", "feet":"5", "inch":"11", "weight":"155", "fitnessGoal":"strength", "token":"1"},
+]
+
+    function drawScatter(scatterDS) {
+        var dataArray = [['Age', 'Weight', {role:'style'} ]];
+        // console.log("in scatter!");
+
+        for (var j=0; j<scatterDS.length; j++) {
+            var age = parseInt(scatterDS[j].age);
+            var weight = parseInt(scatterDS[j].weight);
+            var gender = scatterDS[j].gender.toLowerCase();
+            var genderColor = gender[0]==='m' ? 'blue' : 'pink';
+            var babyArray = [age, weight, 'point { fill-color: ' + genderColor];
+            dataArray.push(babyArray);
+         }
+
+        var data = google.visualization.arrayToDataTable(dataArray);
+
+        var options = {
+            title: 'Fitness Guru Community',
+            pointSize: 7,
+            legend: 'none',
+            height: 250, width: 520, 
+            hAxis: {title: 'Age'},
+            vAxis: {title: 'Weight'}
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('scatterDiv'));
+        chart.draw(data, options);
+    }   
 
     function drawWeight(weightIn) {
         google.charts.setOnLoadCallback(drawChart);
@@ -300,6 +350,10 @@ $(document).ready(function() {
             var options = {
                 title: 'Weight History (lbs)',
                 curveType: 'function',
+                pointSize: 7,
+                series: {
+                    0: { pointShape: 'diamond' }
+                },
                 legend: {
                     position: 'none'
                 },
@@ -313,9 +367,9 @@ $(document).ready(function() {
     }
 
     function renderRec(userProfile) {
-        console.log("current: ", currentUser);
+        // console.log("current: ", currentUser);
         getWeight();
-        console.log("check1", currentWeightHistory);
+        // console.log("check1", currentWeightHistory);
         userProfile.inch = parseInt(userProfile.inch);
         userProfile.feet = parseInt(userProfile.feet);
         userProfile.weight = parseInt(userProfile.weight);
@@ -328,16 +382,22 @@ $(document).ready(function() {
         var userPound = parseInt(userProfile.weight);
         // This is gonna return {'bmi':bmi,'bmiStr':bmiStr}
         var bmiObj = calcBMI(userProfile);
+        drawBMI(bmiObj);
         var recObj = profileToRecomm(userProfile, bmiObj);
         $('#rec-resistance').html(recObj.resistance);
         $('#rec-cardio').html(recObj.cardio);
         $('#rec-nutrition').html(recObj.nutrition);
         $('#user-name').text(userProfile.name)
-        console.log("bmiObj: ", bmiObj)
-        drawBMI(bmiObj);
+        // console.log("bmiObj: ", bmiObj)
         $('#weightSpan').text(userPound);
         $('#goalSpan').text(userProfile.fitnessGoal.toUpperCase());
         // drawWeight(weightTest);
     }
 
+    function drawAllCharts() {
+        // console.log("drawing charts");
+        drawScatter(testScatter);
+    }
+
+    google.charts.setOnLoadCallback(drawAllCharts);
 });
