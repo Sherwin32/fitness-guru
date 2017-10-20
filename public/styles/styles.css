@@ -91,6 +91,11 @@ h1, h2 {
 	height: 280px;
 }
 
+a:hover {
+     text-decoration:none;
+     text-shadow: 1px 1px 1px #555;
+}
+
 footer {
 	height: 80px;
 	/*background-color: lightgrey;*/
